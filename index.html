@@ -1,0 +1,1646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strategic Management — Visual Study Guide</title>
+<script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: inherit; background: var(--background); color: var(--foreground); margin: 0; padding: 0; }
+  
+  /* Sidebar */
+  #sidebar { width: 220px; min-width: 220px; background: var(--sidebar, var(--card)); border-right: 1px solid var(--border); height: 100vh; overflow-y: auto; position: fixed; left: 0; top: 0; z-index: 10; }
+  #main { margin-left: 220px; padding: 24px; min-height: 100vh; }
+  
+  /* Nav buttons */
+  .nav-mod { font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted-foreground); padding: 16px 16px 6px; }
+  .nav-btn { display: block; width: 100%; text-align: left; padding: 7px 16px; font-size: 13px; cursor: pointer; border: none; background: transparent; color: var(--foreground); border-left: 3px solid transparent; transition: all 0.15s; }
+  .nav-btn:hover { background: var(--accent); }
+  .nav-btn.active { border-left-color: #2563eb; background: var(--accent); font-weight: 600; color: #2563eb; }
+  
+  /* Cards */
+  .concept-card { display: none; }
+  .concept-card.visible { display: block; }
+  
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+  .card-title { font-size: 20px; font-weight: 700; margin: 0 0 6px; color: var(--foreground); }
+  .card-sub { font-size: 13px; color: var(--muted-foreground); margin-bottom: 18px; }
+  
+  .exam-box { background: #fff7ed; border: 2px solid #f97316; border-radius: 10px; padding: 14px 18px; margin: 16px 0; }
+  .exam-box-title { font-weight: 700; color: #c2410c; font-size: 13px; margin-bottom: 6px; }
+  .exam-box p { font-size: 13px; color: #7c2d12; margin: 0; }
+  
+  .tip-box { background: #f0fdf4; border: 1.5px solid #22c55e; border-radius: 10px; padding: 12px 16px; margin: 12px 0; font-size: 13px; color: #15803d; }
+  .case-box { background: #eff6ff; border: 1.5px solid #3b82f6; border-radius: 10px; padding: 14px 18px; margin: 14px 0; }
+  .case-box-title { font-weight: 700; color: #1d4ed8; font-size: 13px; margin-bottom: 8px; }
+  .case-box p { font-size: 13px; color: #1e40af; margin: 4px 0; }
+  
+  /* Tables */
+  .styled-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 12px 0; }
+  .styled-table th { background: #1d4ed8; color: white; padding: 8px 12px; text-align: left; font-weight: 600; }
+  .styled-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .styled-table tr:nth-child(even) td { background: #eff6ff; }
+  .styled-table tr:nth-child(odd) td { background: var(--card); }
+  
+  /* Bullet list */
+  .bullet-list { list-style: none; padding: 0; margin: 10px 0; }
+  .bullet-list li { padding: 4px 0 4px 20px; position: relative; font-size: 13px; }
+  .bullet-list li::before { content: "→"; position: absolute; left: 0; color: #2563eb; font-weight: 700; }
+  
+  /* Diagrams */
+  .diagram-wrap { overflow-x: auto; margin: 16px 0; }
+  svg text { font-family: inherit; }
+  
+  /* Section heading inside card */
+  .sec { font-size: 15px; font-weight: 700; color: #1d4ed8; margin: 18px 0 8px; border-bottom: 2px solid #dbeafe; padding-bottom: 4px; }
+  
+  /* Tag */
+  .tag { display: inline-block; background: #dbeafe; color: #1d4ed8; border-radius: 999px; padding: 2px 10px; font-size: 11px; font-weight: 600; margin-right: 6px; }
+  .tag.orange { background: #ffedd5; color: #c2410c; }
+  .tag.green { background: #dcfce7; color: #166534; }
+  .tag.purple { background: #f3e8ff; color: #7e22ce; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ SIDEBAR ═══════════════ -->
+<div id="sidebar">
+  <div style="padding:16px 16px 8px; border-bottom:1px solid var(--border);">
+    <div style="font-weight:800; font-size:14px; color:var(--foreground);">📚 SM Study Guide</div>
+    <div style="font-size:11px; color:var(--muted-foreground); margin-top:2px;">Dr. Puja Sareen · STRA701</div>
+  </div>
+  
+  <div class="nav-mod">Module 1 — Fundamentals</div>
+  <button class="nav-btn active" onclick="show('intro')">🎯 What is Strategy?</button>
+  <button class="nav-btn" onclick="show('mintzberg')">📐 Mintzberg's 5 Ps</button>
+  <button class="nav-btn" onclick="show('vmso')">🔭 Vision · Mission · Objectives</button>
+  <button class="nav-btn" onclick="show('smprocess')">⚙️ SM Process</button>
+  <button class="nav-btn" onclick="show('levels')">🏛️ Levels of Strategy</button>
+  <button class="nav-btn" onclick="show('corporate')">🌳 Corporate Strategy Tree</button>
+  <button class="nav-btn" onclick="show('spicejet')">✈️ SpiceJet Case</button>
+  <button class="nav-btn" onclick="show('csr')">🌍 CSR & Carroll's Pyramid</button>
+  
+  <div class="nav-mod">Module 2 — Analysis Tools</div>
+  <button class="nav-btn" onclick="show('pestel')">🌐 PESTEL</button>
+  <button class="nav-btn" onclick="show('porter5')">⚡ Porter's 5+1 Forces</button>
+  <button class="nav-btn" onclick="show('vca')">🔗 Value Chain Analysis</button>
+  <button class="nav-btn" onclick="show('swot')">🎯 SWOT / TOWS</button>
+  <button class="nav-btn" onclick="show('scenario')">🌊 Scenario Analysis</button>
+  <button class="nav-btn" onclick="show('vuca')">🌪️ VUCA World</button>
+  <button class="nav-btn" onclick="show('rbv')">💎 RBV & VRIO</button>
+  <button class="nav-btn" onclick="show('blueocean')">🏄 Red vs Blue Ocean</button>
+  
+  <div class="nav-mod">Module 3 — Portfolio Tools</div>
+  <button class="nav-btn" onclick="show('bcg')">📊 BCG Matrix</button>
+  <button class="nav-btn" onclick="show('ge')">🗂️ GE Nine-Cell Matrix</button>
+  <button class="nav-btn" onclick="show('bcgvge')">⚖️ BCG vs GE Comparison</button>
+  <button class="nav-btn" onclick="show('ansoff')">🚀 Ansoff Matrix</button>
+  <button class="nav-btn" onclick="show('grand')">🗺️ Grand Strategy Matrix</button>
+  <button class="nav-btn" onclick="show('porter_gen')">🏆 Porter's Generic Strategies</button>
+
+  <div class="nav-mod">Practice</div>
+  <button class="nav-btn" onclick="show('exam_q')">📝 22 Exam Q&amp;A</button>
+  <button class="nav-btn" onclick="show('tool_select')">🔧 Tool Selection Guide</button>
+</div>
+
+<!-- ═══════════════ MAIN CONTENT ═══════════════ -->
+<div id="main">
+
+<!-- ─── INTRO: What is Strategy ─── -->
+<div id="card-intro" class="concept-card visible">
+  <div class="card">
+    <div class="card-title">🎯 What Is Strategy?</div>
+    <div class="card-sub"><span class="tag">Module 1</span><span class="tag orange">Foundational</span></div>
+    <p style="font-size:14px;">Strategy is a <strong>fundamental pattern</strong> of objectives, resource deployments, and interactions with the environment. From Greek <em>Strategia</em> — the art of the military commander.</p>
+    
+    <div class="sec">Planning vs. Strategy</div>
+    <div class="diagram-wrap">
+      <svg width="640" height="160" viewBox="0 0 640 160">
+        <!-- Planning box -->
+        <rect x="20" y="30" width="270" height="110" rx="12" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+        <text x="155" y="58" text-anchor="middle" font-weight="700" font-size="15" fill="#1d4ed8">📋 PLANNING</text>
+        <text x="155" y="78" text-anchor="middle" font-size="12" fill="#1e40af">Answers the W's</text>
+        <text x="155" y="96" text-anchor="middle" font-size="12" fill="#1e40af">What · When · Who · Where</text>
+        <text x="155" y="114" text-anchor="middle" font-size="11" fill="#3b82f6">Short-term · Operational · Rigid</text>
+        <text x="155" y="132" text-anchor="middle" font-size="11" fill="#3b82f6">Output: Schedules &amp; Budgets</text>
+        
+        <!-- Arrow -->
+        <text x="320" y="92" text-anchor="middle" font-size="30" fill="#6b7280">≠</text>
+        
+        <!-- Strategy box -->
+        <rect x="350" y="30" width="270" height="110" rx="12" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
+        <text x="485" y="58" text-anchor="middle" font-weight="700" font-size="15" fill="#c2410c">🎯 STRATEGY</text>
+        <text x="485" y="78" text-anchor="middle" font-size="12" fill="#9a3412">Answers the HOW</text>
+        <text x="485" y="96" text-anchor="middle" font-size="12" fill="#9a3412">How do we compete and WIN?</text>
+        <text x="485" y="114" text-anchor="middle" font-size="11" fill="#ea580c">Long-term · Directional · Adaptive</text>
+        <text x="485" y="132" text-anchor="middle" font-size="11" fill="#ea580c">Output: Competitive Positioning</text>
+      </svg>
+    </div>
+    
+    <div class="tip-box">💡 <strong>Exam tip:</strong> Planning says "We will open 10 stores in Year 1." Strategy says "We will out-compete rivals by becoming the co-working hub for Gen Z."</div>
+    
+    <div class="sec">Talent vs. Strategy — The Opening Debate</div>
+    <table class="styled-table">
+      <tr><th>Talent Alone</th><th>Strategy Alone</th><th>Both Together ✓</th></tr>
+      <tr><td>Energy without direction — scattered effort</td><td>Great plan, wrong people — fails in execution</td><td>Right people, right direction = competitive advantage</td></tr>
+    </table>
+    
+    <div class="case-box">
+      <div class="case-box-title">🌍 Real World: Iran-Israel-USA Geopolitics</div>
+      <p>Each nation had different talent levels AND different strategies. Outcomes differed not because one army was smarter, but because strategies were better aligned with objectives and resources — your professor's point: <strong>strategy IS the multiplier on talent.</strong></p>
+    </div>
+  </div>
+</div>
+
+<!-- ─── MINTZBERG 5 Ps ─── -->
+<div id="card-mintzberg" class="concept-card">
+  <div class="card">
+    <div class="card-title">📐 Mintzberg's 5 Ps of Strategy</div>
+    <div class="card-sub"><span class="tag">Module 1</span><span class="tag orange">Likely Exam Q</span></div>
+    <p style="font-size:14px;">Henry Mintzberg argued that "strategy" is not one concept — it has 5 distinct meanings. Real strategy is always a <em>blend</em> of deliberate (planned) and emergent (unplanned) patterns.</p>
+
+    <div class="sec">The 5 Ps — Visual Diagram</div>
+    <div class="diagram-wrap">
+      <svg width="680" height="320" viewBox="0 0 680 320">
+        <!-- Center circle -->
+        <circle cx="340" cy="160" r="55" fill="#1d4ed8"/>
+        <text x="340" y="154" text-anchor="middle" font-size="15" font-weight="800" fill="white">STRATEGY</text>
+        <text x="340" y="172" text-anchor="middle" font-size="12" fill="#bfdbfe">5 Ps</text>
+        
+        <!-- P1: Plan (top) -->
+        <line x1="340" y1="105" x2="340" y2="48" stroke="#2563eb" stroke-width="2" stroke-dasharray="4"/>
+        <rect x="255" y="10" width="170" height="60" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+        <text x="340" y="33" text-anchor="middle" font-weight="700" font-size="13" fill="#1d4ed8">📋 PLAN</text>
+        <text x="340" y="50" text-anchor="middle" font-size="11" fill="#1e40af">Deliberate, intended</text>
+        <text x="340" y="64" text-anchor="middle" font-size="11" fill="#1e40af">course of action</text>
+        
+        <!-- P2: Ploy (top-right) -->
+        <line x1="385" y1="118" x2="480" y2="60" stroke="#7c3aed" stroke-width="2" stroke-dasharray="4"/>
+        <rect x="470" y="15" width="180" height="60" rx="10" fill="#f3e8ff" stroke="#7c3aed" stroke-width="1.5"/>
+        <text x="560" y="38" text-anchor="middle" font-weight="700" font-size="13" fill="#7c3aed">🎭 PLOY</text>
+        <text x="560" y="55" text-anchor="middle" font-size="11" fill="#6d28d9">Tactical maneuver</text>
+        <text x="560" y="69" text-anchor="middle" font-size="11" fill="#6d28d9">to outsmart rivals</text>
+        
+        <!-- P3: Pattern (right) -->
+        <line x1="395" y1="160" x2="490" y2="160" stroke="#059669" stroke-width="2" stroke-dasharray="4"/>
+        <rect x="492" y="130" width="175" height="60" rx="10" fill="#d1fae5" stroke="#059669" stroke-width="1.5"/>
+        <text x="580" y="154" text-anchor="middle" font-weight="700" font-size="13" fill="#065f46">📈 PATTERN</text>
+        <text x="580" y="170" text-anchor="middle" font-size="11" fill="#047857">Consistent behaviour</text>
+        <text x="580" y="184" text-anchor="middle" font-size="11" fill="#047857">= Emergent strategy</text>
+        
+        <!-- P4: Position (bottom-right) -->
+        <line x1="380" y1="205" x2="472" y2="260" stroke="#d97706" stroke-width="2" stroke-dasharray="4"/>
+        <rect x="462" y="248" width="175" height="60" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+        <text x="550" y="272" text-anchor="middle" font-weight="700" font-size="13" fill="#92400e">📍 POSITION</text>
+        <text x="550" y="289" text-anchor="middle" font-size="11" fill="#b45309">Market niche placement</text>
+        <text x="550" y="303" text-anchor="middle" font-size="11" fill="#b45309">where you compete</text>
+        
+        <!-- P5: Perspective (bottom-left) -->
+        <line x1="295" y1="205" x2="205" y2="260" stroke="#dc2626" stroke-width="2" stroke-dasharray="4"/>
+        <rect x="18" y="248" width="175" height="60" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+        <text x="105" y="272" text-anchor="middle" font-weight="700" font-size="13" fill="#dc2626">🧭 PERSPECTIVE</text>
+        <text x="105" y="289" text-anchor="middle" font-size="11" fill="#b91c1c">Organisational worldview</text>
+        <text x="105" y="303" text-anchor="middle" font-size="11" fill="#b91c1c">culture &amp; shared values</text>
+      </svg>
+    </div>
+
+    <table class="styled-table">
+      <tr><th>P</th><th>Name</th><th>Definition</th><th>Example</th></tr>
+      <tr><td>1</td><td><strong>Plan</strong></td><td>Deliberate, intended course of action made in advance</td><td>Apple's 3-year product roadmap</td></tr>
+      <tr><td>2</td><td><strong>Ploy</strong></td><td>Tactical maneuver to outsmart a rival</td><td>Samsung announcing a product to deter Apple's launch</td></tr>
+      <tr><td>3</td><td><strong>Pattern</strong></td><td>Consistent behavior over time — emergent strategy</td><td>Apple consistently making premium products (even if never formally planned)</td></tr>
+      <tr><td>4</td><td><strong>Position</strong></td><td>Finding the right market niche</td><td>Apple positioning as "premium, design-first" tech</td></tr>
+      <tr><td>5</td><td><strong>Perspective</strong></td><td>Firm's worldview, culture, and values</td><td>Apple's culture: "Think Different"</td></tr>
+    </table>
+    
+    <div class="exam-box">
+      <div class="exam-box-title">⭐ EXAM MODEL ANSWER: Explain Mintzberg's 5 Ps</div>
+      <p>Mintzberg argued strategy cannot be defined by a single concept — it has 5 Ps: <strong>Plan</strong> (deliberate, intended action), <strong>Ploy</strong> (tactical maneuver to outsmart rivals), <strong>Pattern</strong> (consistent behaviour = emergent strategy), <strong>Position</strong> (locating the firm in the right market niche), and <strong>Perspective</strong> (the shared organisational worldview and culture driving all decisions). Real-world strategy is always a blend of deliberate plans and emergent patterns — what a firm intends vs. what actually happens.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ─── VISION MISSION ─── -->
+<div id="card-vmso" class="concept-card">
+  <div class="card">
+    <div class="card-title">🔭 Vision · Mission · Objectives · Strategic Intent</div>
+    <div class="card-sub"><span class="tag">Module 1</span><span class="tag orange">Definitions Q — Likely Tested</span></div>
+    
+    <div class="sec">The Hierarchy Pyramid</div>
+    <div class="diagram-wrap">
+      <svg width="580" height="260" viewBox="0 0 580 260">
+        <!-- Strategic Intent (top) -->
+        <polygon points="290,10 190,70 390,70" fill="#7c3aed" opacity="0.9"/>
+        <text x="290" y="38" text-anchor="middle" font-size="11" font-weight="700" fill="white">STRATEGIC INTENT</text>
+        <text x="290" y="55" text-anchor="middle" font-size="10" fill="#e9d5ff">Long-term stretch ambition</text>
+        
+        <!-- Vision -->
+        <polygon points="190,75 110,135 470,135" fill="#1d4ed8" opacity="0.85"/>
+        <text x="290" y="104" text-anchor="middle" font-size="12" font-weight="700" fill="white">VISION</text>
+        <text x="290" y="121" text-anchor="middle" font-size="11" fill="#bfdbfe">Where do we WANT to be?</text>
+        
+        <!-- Mission -->
+        <polygon points="110,140 40,200 540,200" fill="#0369a1" opacity="0.8"/>
+        <text x="290" y="168" text-anchor="middle" font-size="12" font-weight="700" fill="white">MISSION</text>
+        <text x="290" y="185" text-anchor="middle" font-size="11" fill="#bae6fd">Why do we EXIST? What is our business?</text>
+        
+        <!-- Objectives -->
+        <polygon points="40,205 10,250 570,250" fill="#0e7490" opacity="0.75"/>
+        <text x="290" y="227" text-anchor="middle" font-size="12" font-weight="700" fill="white">OBJECTIVES</text>
+        <text x="290" y="244" text-anchor="middle" font-size="11" fill="#a5f3fc">Specific · Measurable · Time-bound targets</text>
+        
+        <!-- Left labels -->
+        <text x="5" y="40" font-size="10" fill="#7c3aed" font-weight="700">Most Abstract</text>
+        <text x="5" y="248" font-size="10" fill="#0e7490" font-weight="700">Most Concrete</text>
+      </svg>
+    </div>
+    
+    <table class="styled-table">
+      <tr><th>Concept</th><th>Time Frame</th><th>Nature</th><th>Key Question</th><th>Example</th></tr>
+      <tr><td><strong>Strategic Intent</strong></td><td>Decades</td><td>Obsessive ambition</td><td>"What do we dream of?"</td><td>NASA: "Man on moon by decade's end"</td></tr>
+      <tr><td><strong>Vision</strong></td><td>Long-term</td><td>Inspirational aspiration</td><td>"Where are we going?"</td><td>"Most loved beverage company in the world"</td></tr>
+      <tr><td><strong>Mission</strong></td><td>Present/ongoing</td><td>Descriptive purpose</td><td>"Why do we exist?"</td><td>"Refreshing the world, inspiring optimism"</td></tr>
+      <tr><td><strong>Objectives</strong></td><td>Short–medium</td><td>Measurable targets</td><td>"What must we achieve?"</td><td>"Grow North India share from 12% to 18% in 2 years"</td></tr>
+    </table>
+    
+    <div class="tip-box">💡 <strong>Memory trick:</strong> SI (dream) → Vision (aspire) → Mission (purpose) → Objectives (measure). Each is more concrete than the previous.</div>
+    
+    <div class="exam-box">
+      <div class="exam-box-title">⭐ EXAM TIP: Common Confusion</div>
+      <p>Students often mix up Vision and Mission. <strong>Vision = where you want to BE in the future.</strong> <strong>Mission = why you exist TODAY.</strong> Strategic Intent is the most extreme/emotional level — it's almost like an obsession (Komatsu: "Encircle Caterpillar").</p>
+    </div>
+  </div>
+</div>
+
+<!-- ─── SM PROCESS ─── -->
+<div id="card-smprocess" class="concept-card">
+  <div class="card">
+    <div class="card-title">⚙️ Strategic Management Process</div>
+    <div class="card-sub"><span class="tag">Module 1</span></div>
+    <div class="diagram-wrap">
+      <svg width="680" height="130" viewBox="0 0 680 130">
+        <!-- Box 1 -->
+        <rect x="10" y="30" width="145" height="70" rx="10" fill="#7c3aed"/>
+        <text x="82" y="56" text-anchor="middle" font-size="11" font-weight="700" fill="white">STRATEGIC</text>
+        <text x="82" y="72" text-anchor="middle" font-size="11" font-weight="700" fill="white">INTENT</text>
+        <text x="82" y="90" text-anchor="middle" font-size="10" fill="#e9d5ff">Vision·Mission·Objectives</text>
+        
+        <text x="165" y="70" text-anchor="middle" font-size="20" fill="#6b7280">→</text>
+        
+        <!-- Box 2 -->
+        <rect x="175" y="30" width="145" height="70" rx="10" fill="#1d4ed8"/>
+        <text x="247" y="56" text-anchor="middle" font-size="11" font-weight="700" fill="white">STRATEGY</text>
+        <text x="247" y="72" text-anchor="middle" font-size="11" font-weight="700" fill="white">FORMULATION</text>
+        <text x="247" y="90" text-anchor="middle" font-size="10" fill="#bfdbfe">SWOT·PESTEL·BCG·GE</text>
+        
+        <text x="330" y="70" text-anchor="middle" font-size="20" fill="#6b7280">→</text>
+        
+        <!-- Box 3 -->
+        <rect x="340" y="30" width="155" height="70" rx="10" fill="#0369a1"/>
+        <text x="417" y="56" text-anchor="middle" font-size="11" font-weight="700" fill="white">STRATEGY</text>
+        <text x="417" y="72" text-anchor="middle" font-size="11" font-weight="700" fill="white">IMPLEMENTATION</text>
+        <text x="417" y="90" text-anchor="middle" font-size="10" fill="#bae6fd">Programs·Budgets·Procedures</text>
+        
+        <text x="505" y="70" text-anchor="middle" font-size="20" fill="#6b7280">→</text>
+        
+        <!-- Box 4 -->
+        <rect x="515" y="30" width="155" height="70" rx="10" fill="#0e7490"/>
+        <text x="592" y="56" text-anchor="middle" font-size="11" font-weight="700" fill="white">EVALUATION</text>
+        <text x="592" y="72" text-anchor="middle" font-size="11" font-weight="700" fill="white">&amp; CONTROL</text>
+        <text x="592" y="90" text-anchor="middle" font-size="10" fill="#a5f3fc">Measure·Correct·Feedback</text>
+        
+        <!-- Feedback arrow back -->
+        <path d="M 670 110 Q 340 130 10 110" stroke="#6b7280" stroke-width="1.5" fill="none" stroke-dasharray="5"/>
+        <text x="340" y="128" text-anchor="middle" font-size="10" fill="#6b7280">← Feedback loop back to Formulation</text>
+      </svg>
+    </div>
+    
+    <table class="styled-table">
+      <tr><th>Phase</th><th>What Happens</th><th>Key Tools Used</th></tr>
+      <tr><td><strong>Strategic Intent</strong></td><td>Define Vision → Mission → Objectives → Strategic Intent</td><td>Stakeholder analysis, leadership workshops</td></tr>
+      <tr><td><strong>Strategy Formulation</strong></td><td>Scan environment, generate strategic options, make choices at Corporate/SBU/Functional levels</td><td>PESTEL, SWOT, Porter's 5 Forces, VRIO, BCG, GE Matrix</td></tr>
+      <tr><td><strong>Strategy Implementation</strong></td><td>Convert strategy into action via programs, budgets, structural changes, culture change</td><td>Project plans, org design, KPIs, resource allocation</td></tr>
+      <tr><td><strong>Evaluation &amp; Control</strong></td><td>Monitor performance against targets, identify deviations, take corrective action</td><td>Balanced Scorecard, strategic control dashboards</td></tr>
+    </table>
+    <div class="tip-box">💡 This is a <strong>continuous cycle</strong>, not a one-time event. Evaluation feeds back into Formulation — strategy is always evolving.</div>
+  </div>
+</div>
+
+<!-- ─── LEVELS ─── -->
+<div id="card-levels" class="concept-card">
+  <div class="card">
+    <div class="card-title">🏛️ Levels of Strategy</div>
+    <div class="card-sub"><span class="tag">Module 1</span><span class="tag orange">Almost Certain Exam Q</span></div>
+
+    <div class="sec">The Strategy Pyramid</div>
+    <div class="diagram-wrap">
+      <svg width="600" height="260" viewBox="0 0 600 260">
+        <!-- Corporate Level -->
+        <rect x="150" y="10" width="300" height="52" rx="8" fill="#1e1b4b"/>
+        <text x="300" y="32" text-anchor="middle" font-size="13" font-weight="800" fill="white">CORPORATE STRATEGY</text>
+        <text x="300" y="50" text-anchor="middle" font-size="11" fill="#c7d2fe">Board of Directors + CEO · Long-term</text>
+        <text x="140" y="38" text-anchor="end" font-size="10" fill="#6b7280">LEVEL 1</text>
+        
+        <!-- SBU Level -->
+        <rect x="100" y="75" width="400" height="52" rx="8" fill="#1d4ed8"/>
+        <text x="300" y="97" text-anchor="middle" font-size="13" font-weight="800" fill="white">SBU / BUSINESS STRATEGY</text>
+        <text x="300" y="115" text-anchor="middle" font-size="11" fill="#bfdbfe">SBU Executives · How to compete in THIS market</text>
+        <text x="90" y="103" text-anchor="end" font-size="10" fill="#6b7280">LEVEL 2</text>
+        
+        <!-- Functional Level -->
+        <rect x="50" y="140" width="500" height="52" rx="8" fill="#0369a1"/>
+        <text x="300" y="162" text-anchor="middle" font-size="13" font-weight="800" fill="white">FUNCTIONAL STRATEGY</text>
+        <text x="300" y="180" text-anchor="middle" font-size="11" fill="#bae6fd">Dept. Heads · HR · Marketing · Finance · Ops · R&amp;D · IT</text>
+        <text x="40" y="168" text-anchor="end" font-size="10" fill="#6b7280">LEVEL 3</text>
+        
+        <!-- Operational Level -->
+        <rect x="10" y="205" width="580" height="48" rx="8" fill="#0e7490"/>
+        <text x="300" y="226" text-anchor="middle" font-size="13" font-weight="800" fill="white">OPERATIONAL STRATEGY</text>
+        <text x="300" y="244" text-anchor="middle" font-size="11" fill="#a5f3fc">Supervisors · Day-to-day procedures · Implementation</text>
+        <text x="5" y="230" text-anchor="end" font-size="10" fill="#6b7280">LEVEL 4</text>
+        
+        <!-- Arrows showing cascade -->
+        <text x="305" y="70" text-anchor="middle" font-size="18" fill="#6b7280">↓</text>
+        <text x="305" y="135" text-anchor="middle" font-size="18" fill="#6b7280">↓</text>
+        <text x="305" y="200" text-anchor="middle" font-size="18" fill="#6b7280">↓</text>
+      </svg>
+    </div>
+    
+    <div class="tip-box">💡 <strong>Single-business firm</strong> (no SBUs) = only 3 levels: Corporate → Functional → Operational. No SBU level needed.</div>
+    
+    <table class="styled-table">
+      <tr><th>Level</th><th>Formulated By</th><th>Time Horizon</th><th>Key Question</th><th>Example</th></tr>
+      <tr><td><strong>Corporate</strong></td><td>Board + CEO</td><td>Long-term</td><td>What businesses to be in? How to allocate resources?</td><td>Tata Group deciding to enter airline business</td></tr>
+      <tr><td><strong>SBU/Business</strong></td><td>Division Head</td><td>Medium-long</td><td>How does THIS unit compete?</td><td>Tata Airlines deciding to be a full-service carrier</td></tr>
+      <tr><td><strong>Functional</strong></td><td>Dept. Heads</td><td>Short-long</td><td>How does each dept. support the strategy?</td><td>Tata Airlines HR strategy for pilot recruitment</td></tr>
+      <tr><td><strong>Operational</strong></td><td>Supervisors</td><td>Day-to-day</td><td>How do we execute the functional plan?</td><td>Daily ground crew procedures, safety checklists</td></tr>
+    </table>
+    
+    <div class="exam-box">
+      <div class="exam-box-title">⭐ EXAM: Distinguish SBU Strategy vs Functional Strategy</div>
+      <p><strong>SBU:</strong> Scope = one business unit; Focus = how to compete in the market; Who = SBU top execs; Time = medium-long. <strong>Functional:</strong> Scope = one department (HR, Mktg, etc.); Focus = how to support SBU/corporate goals; Who = dept. heads; Time = short-long. SBU asks "who to beat and how?" Functional asks "how does my department help us beat them?"</p>
+    </div>
+  </div>
+</div>
+
+<!-- ─── CORPORATE STRATEGY TREE ─── -->
+<div id="card-corporate" class="concept-card">
+  <div class="card">
+    <div class="card-title">🌳 Corporate Strategy — Full Tree</div>
+    <div class="card-sub"><span class="tag">Module 1</span><span class="tag orange">Very Likely Exam Q</span></div>
+    <div class="diagram-wrap">
+      <svg width="700" height="400" viewBox="0 0 700 400">
+        <!-- Root -->
+        <rect x="250" y="10" width="200" height="40" rx="8" fill="#1e1b4b"/>
+        <text x="350" y="35" text-anchor="middle" font-size="13" font-weight="700" fill="white">CORPORATE STRATEGY</text>
+        
+        <!-- Three branches -->
+        <line x1="350" y1="50" x2="115" y2="90" stroke="#1e1b4b" stroke-width="2"/>
+        <line x1="350" y1="50" x2="350" y2="90" stroke="#1e1b4b" stroke-width="2"/>
+        <line x1="350" y1="50" x2="585" y2="90" stroke="#1e1b4b" stroke-width="2"/>
+        
+        <!-- GROWTH branch -->
+        <rect x="20" y="90" width="190" height="36" rx="8" fill="#15803d"/>
+        <text x="115" y="113" text-anchor="middle" font-size="12" font-weight="700" fill="white">🌱 GROWTH</text>
+        
+        <!-- Growth sub-nodes -->
+        <line x1="115" y1="126" x2="40" y2="162" stroke="#15803d" stroke-width="1.5"/>
+        <line x1="115" y1="126" x2="115" y2="162" stroke="#15803d" stroke-width="1.5"/>
+        <line x1="115" y1="126" x2="190" y2="162" stroke="#15803d" stroke-width="1.5"/>
+        
+        <rect x="5" y="162" width="70" height="30" rx="6" fill="#dcfce7" stroke="#15803d"/>
+        <text x="40" y="182" text-anchor="middle" font-size="10" fill="#14532d">Concentration</text>
+        
+        <rect x="80" y="162" width="70" height="30" rx="6" fill="#dcfce7" stroke="#15803d"/>
+        <text x="115" y="178" text-anchor="middle" font-size="10" fill="#14532d">Vertical</text>
+        <text x="115" y="190" text-anchor="middle" font-size="10" fill="#14532d">Integration</text>
+        
+        <!-- Vertical Integration sub -->
+        <line x1="115" y1="192" x2="90" y2="218" stroke="#15803d" stroke-width="1"/>
+        <line x1="115" y1="192" x2="140" y2="218" stroke="#15803d" stroke-width="1"/>
+        <rect x="56" y="218" width="68" height="26" rx="5" fill="#f0fdf4" stroke="#15803d"/>
+        <text x="90" y="232" text-anchor="middle" font-size="9" fill="#14532d">Forward ↓</text>
+        <text x="90" y="241" text-anchor="middle" font-size="9" fill="#14532d">(to customer)</text>
+        <rect x="128" y="218" width="68" height="26" rx="5" fill="#f0fdf4" stroke="#15803d"/>
+        <text x="162" y="232" text-anchor="middle" font-size="9" fill="#14532d">Backward ↑</text>
+        <text x="162" y="241" text-anchor="middle" font-size="9" fill="#14532d">(to supplier)</text>
+        
+        <rect x="155" y="162" width="70" height="30" rx="6" fill="#dcfce7" stroke="#15803d"/>
+        <text x="190" y="178" text-anchor="middle" font-size="10" fill="#14532d">Horizontal</text>
+        <text x="190" y="190" text-anchor="middle" font-size="10" fill="#14532d">Integration</text>
+        
+        <!-- Diversification -->
+        <line x1="115" y1="126" x2="230" y2="162" stroke="#15803d" stroke-width="1.5"/>
+        <rect x="200" y="162" width="70" height="30" rx="6" fill="#dcfce7" stroke="#15803d"/>
+        <text x="235" y="182" text-anchor="middle" font-size="10" fill="#14532d">Diversification</text>
+        <line x1="235" y1="192" x2="215" y2="218" stroke="#15803d" stroke-width="1"/>
+        <line x1="235" y1="192" x2="255" y2="218" stroke="#15803d" stroke-width="1"/>
+        <rect x="178" y="218" width="68" height="26" rx="5" fill="#f0fdf4" stroke="#15803d"/>
+        <text x="212" y="232" text-anchor="middle" font-size="9" fill="#14532d">Related</text>
+        <text x="212" y="241" text-anchor="middle" font-size="9" fill="#14532d">(Concentric)</text>
+        <rect x="248" y="218" width="75" height="26" rx="5" fill="#f0fdf4" stroke="#15803d"/>
+        <text x="285" y="232" text-anchor="middle" font-size="9" fill="#14532d">Unrelated</text>
+        <text x="285" y="241" text-anchor="middle" font-size="9" fill="#14532d">(Conglomerate)</text>
+        
+        <!-- STABILITY branch -->
+        <rect x="255" y="90" width="190" height="36" rx="8" fill="#0369a1"/>
+        <text x="350" y="113" text-anchor="middle" font-size="12" font-weight="700" fill="white">⚖️ STABILITY</text>
+        
+        <line x1="350" y1="126" x2="290" y2="162" stroke="#0369a1" stroke-width="1.5"/>
+        <line x1="350" y1="126" x2="350" y2="162" stroke="#0369a1" stroke-width="1.5"/>
+        <line x1="350" y1="126" x2="410" y2="162" stroke="#0369a1" stroke-width="1.5"/>
+        
+        <rect x="255" y="162" width="70" height="30" rx="6" fill="#dbeafe" stroke="#0369a1"/>
+        <text x="290" y="178" text-anchor="middle" font-size="10" fill="#1e3a8a">No-Change</text>
+        <text x="290" y="190" text-anchor="middle" font-size="10" fill="#1e3a8a">Strategy</text>
+        
+        <rect x="315" y="162" width="70" height="30" rx="6" fill="#dbeafe" stroke="#0369a1"/>
+        <text x="350" y="178" text-anchor="middle" font-size="10" fill="#1e3a8a">Pause /</text>
+        <text x="350" y="190" text-anchor="middle" font-size="10" fill="#1e3a8a">Proceed</text>
+        
+        <rect x="375" y="162" width="70" height="30" rx="6" fill="#dbeafe" stroke="#0369a1"/>
+        <text x="410" y="178" text-anchor="middle" font-size="10" fill="#1e3a8a">Profit</text>
+        <text x="410" y="190" text-anchor="middle" font-size="10" fill="#1e3a8a">Strategy</text>
+        
+        <!-- RETRENCHMENT branch -->
+        <rect x="490" y="90" width="200" height="36" rx="8" fill="#dc2626"/>
+        <text x="590" y="113" text-anchor="middle" font-size="12" font-weight="700" fill="white">⬇️ RETRENCHMENT</text>
+        
+        <line x1="590" y1="126" x2="530" y2="162" stroke="#dc2626" stroke-width="1.5"/>
+        <line x1="590" y1="126" x2="590" y2="162" stroke="#dc2626" stroke-width="1.5"/>
+        <line x1="590" y1="126" x2="650" y2="162" stroke="#dc2626" stroke-width="1.5"/>
+        
+        <rect x="495" y="162" width="70" height="30" rx="6" fill="#fee2e2" stroke="#dc2626"/>
+        <text x="530" y="182" text-anchor="middle" font-size="10" fill="#7f1d1d">Turnaround</text>
+        
+        <rect x="555" y="162" width="70" height="30" rx="6" fill="#fee2e2" stroke="#dc2626"/>
+        <text x="590" y="182" text-anchor="middle" font-size="10" fill="#7f1d1d">Divestment</text>
+        
+        <rect x="615" y="162" width="70" height="30" rx="6" fill="#fee2e2" stroke="#dc2626"/>
+        <text x="650" y="182" text-anchor="middle" font-size="10" fill="#7f1d1d">Liquidation</text>
+      </svg>
+    </div>
+    
+    <table class="styled-table">
+      <tr><th>Strategy</th><th>Sub-type</th><th>Description</th><th>Example</th></tr>
+      <tr><td rowspan="5"><strong>Growth</strong></td><td>Concentration</td><td>More of same — grow within current scope</td><td>McDonald's opening more outlets</td></tr>
+      <tr><td>Vertical: Forward</td><td>Toward customer — control distribution/retail</td><td>Steel maker opens retail stores</td></tr>
+      <tr><td>Vertical: Backward</td><td>Toward supplier — control inputs</td><td>Cola company buys sugar farms</td></tr>
+      <tr><td>Horizontal Integration</td><td>Acquire competitors at same level</td><td>Facebook buying Instagram</td></tr>
+      <tr><td>Diversification</td><td>Related or Unrelated new businesses</td><td>Tata Group: salt + steel + airlines</td></tr>
+      <tr><td rowspan="3"><strong>Stability</strong></td><td>No-Change</td><td>Maintain current strategy — environment is stable</td><td>Mature market leader in steady industry</td></tr>
+      <tr><td>Pause/Proceed</td><td>Temporarily consolidate before growing again</td><td>Post-COVID recovery phase</td></tr>
+      <tr><td>Profit Strategy</td><td>Cut costs artificially to sustain profit in hostile environment</td><td>Short-term defensive in recession</td></tr>
+      <tr><td rowspan="3"><strong>Retrenchment</strong></td><td>Turnaround</td><td>Aggressive restructuring to reverse decline</td><td>SpiceJet 2015</td></tr>
+      <tr><td>Divestment</td><td>Sell off non-core or loss-making unit</td><td>P&amp;G selling Pringles</td></tr>
+      <tr><td>Liquidation</td><td>Close down entirely — sell all assets</td><td>Kingfisher Airlines</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ─── SPICEJET ─── -->
+<div id="card-spicejet" class="concept-card">
+  <div class="card">
+    <div class="card-title">✈️ SpiceJet — Turnaround Case Study</div>
+    <div class="card-sub"><span class="tag">Module 1</span><span class="tag green">Case Study</span></div>
+    <p style="font-size:14px;">SpiceJet is a <strong>real-world application of Retrenchment → Turnaround strategy</strong> combined with Cost Leadership at the business level.</p>
+    
+    <div class="sec">Timeline Diagram</div>
+    <div class="diagram-wrap">
+      <svg width="680" height="160" viewBox="0 0 680 160">
+        <!-- Timeline line -->
+        <line x1="40" y1="80" x2="640" y2="80" stroke="#d1d5db" stroke-width="3"/>
+        
+        <!-- 2005: Founded -->
+        <circle cx="80" cy="80" r="12" fill="#15803d"/>
+        <text x="80" y="55" text-anchor="middle" font-size="10" font-weight="700" fill="#15803d">2005</text>
+        <text x="80" y="104" text-anchor="middle" font-size="10" fill="#6b7280">Founded</text>
+        <text x="80" y="116" text-anchor="middle" font-size="9" fill="#9ca3af">LCC model</text>
+        
+        <!-- 2014: Crisis -->
+        <circle cx="240" cy="80" r="16" fill="#dc2626"/>
+        <text x="240" y="55" text-anchor="middle" font-size="10" font-weight="700" fill="#dc2626">2014</text>
+        <text x="240" y="104" text-anchor="middle" font-size="10" fill="#dc2626" font-weight="700">CRISIS ⚠️</text>
+        <text x="240" y="116" text-anchor="middle" font-size="9" fill="#6b7280">Cash crunch</text>
+        <text x="240" y="128" text-anchor="middle" font-size="9" fill="#6b7280">Flight cancellations</text>
+        <text x="240" y="140" text-anchor="middle" font-size="9" fill="#6b7280">DGCA warning</text>
+        
+        <!-- 2015: Turnaround -->
+        <circle cx="400" cy="80" r="16" fill="#d97706"/>
+        <text x="400" y="55" text-anchor="middle" font-size="10" font-weight="700" fill="#d97706">2015</text>
+        <text x="400" y="104" text-anchor="middle" font-size="10" fill="#d97706" font-weight="700">TURNAROUND 🔄</text>
+        <text x="400" y="116" text-anchor="middle" font-size="9" fill="#6b7280">Ajay Singh returns</text>
+        <text x="400" y="128" text-anchor="middle" font-size="9" fill="#6b7280">Restructuring begins</text>
+        
+        <!-- 2018: Recovery -->
+        <circle cx="560" cy="80" r="16" fill="#15803d"/>
+        <text x="560" y="55" text-anchor="middle" font-size="10" font-weight="700" fill="#15803d">2018</text>
+        <text x="560" y="104" text-anchor="middle" font-size="10" fill="#15803d" font-weight="700">RECOVERY ✅</text>
+        <text x="560" y="116" text-anchor="middle" font-size="9" fill="#6b7280">Profitable again</text>
+        <text x="560" y="128" text-anchor="middle" font-size="9" fill="#6b7280">Expansion resumes</text>
+      </svg>
+    </div>
+    
+    <div class="sec">The Turnaround Actions — Mapped to Strategy</div>
+    <table class="styled-table">
+      <tr><th>Action Taken</th><th>Strategic Category</th><th>Concept Applied</th></tr>
+      <tr><td>Ajay Singh returned as owner/MD</td><td>Leadership change</td><td>Turnaround — structural change</td></tr>
+      <tr><td>Renegotiated aircraft leases, cut non-essential staff</td><td>Cost restructuring</td><td>Turnaround + Cost Leadership</td></tr>
+      <tr><td>Moved to fuel-efficient Boeing 737 Max fleet</td><td>Operational efficiency</td><td>Value Chain — Operations activity</td></tr>
+      <tr><td>Launched SpiceXpress cargo + ancillary revenues</td><td>New revenue streams</td><td>Diversification within retrenchment</td></tr>
+      <tr><td>Renegotiated vendor dues</td><td>Financial restructuring</td><td>Turnaround — financial</td></tr>
+      <tr><td>Focused only on profitable routes</td><td>Strategic refocus</td><td>Concentration strategy</td></tr>
+    </table>
+    
+    <div class="exam-box">
+      <div class="exam-box-title">⭐ EXAM MODEL ANSWER: SpiceJet</div>
+      <p>SpiceJet represents <strong>Retrenchment → Turnaround</strong> in corporate strategy. Facing collapse in 2014 (cash crunch, DGCA warnings, mass cancellations), Ajay Singh executed a textbook turnaround: leadership change, cost restructuring (lease renegotiation, fleet optimization to fuel-efficient 737 Max), revenue diversification (SpiceXpress cargo), and route rationalization. Business-level strategy remained <strong>Cost Leadership</strong> (LCC model). The strategic lesson: turnaround requires BOTH operational restructuring AND strategic repositioning simultaneously.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ─── CSR ─── -->
+<div id="card-csr" class="concept-card">
+  <div class="card">
+    <div class="card-title">🌍 CSR — Corporate Social Responsibility</div>
+    <div class="card-sub"><span class="tag">Module 1</span><span class="tag orange">Likely Tested — Carroll's Pyramid + Companies Act</span></div>
+    
+    <div class="sec">Carroll's CSR Pyramid (1991)</div>
+    <div class="diagram-wrap">
+      <svg width="560" height="280" viewBox="0 0 560 280">
+        <!-- Philanthropic (top) -->
+        <polygon points="280,15 205,80 355,80" fill="#7c3aed"/>
+        <text x="280" y="45" text-anchor="middle" font-size="11" font-weight="700" fill="white">PHILANTHROPIC</text>
+        <text x="280" y="63" text-anchor="middle" font-size="10" fill="#e9d5ff">Be a good citizen</text>
+        <text x="365" y="48" font-size="10" fill="#7c3aed">← "Give back"</text>
+        
+        <!-- Ethical -->
+        <polygon points="205,85 145,150 415,150" fill="#1d4ed8"/>
+        <text x="280" y="113" text-anchor="middle" font-size="12" font-weight="700" fill="white">ETHICAL</text>
+        <text x="280" y="133" text-anchor="middle" font-size="11" fill="#bfdbfe">Do what is RIGHT — beyond law</text>
+        
+        <!-- Legal -->
+        <polygon points="145,155 75,220 485,220" fill="#0369a1"/>
+        <text x="280" y="183" text-anchor="middle" font-size="12" font-weight="700" fill="white">LEGAL</text>
+        <text x="280" y="203" text-anchor="middle" font-size="11" fill="#bae6fd">Obey all laws &amp; regulations</text>
+        
+        <!-- Economic (base) -->
+        <polygon points="75,225 20,270 540,270" fill="#0e7490"/>
+        <text x="280" y="247" text-anchor="middle" font-size="12" font-weight="700" fill="white">ECONOMIC — BASE</text>
+        <text x="280" y="263" text-anchor="middle" font-size="11" fill="#a5f3fc">Be profitable — enables everything above</text>
+      </svg>
+    </div>
+    
+    <table class="styled-table">
+      <tr><th>Level</th><th>Description</th><th>Example</th></tr>
+      <tr><td><strong>Economic</strong> (Base)</td><td>Be profitable — the foundation that enables all other CSR levels</td><td>Generate returns for shareholders</td></tr>
+      <tr><td><strong>Legal</strong></td><td>Obey all laws — society's minimum codified ethics</td><td>Pay taxes, follow labour laws</td></tr>
+      <tr><td><strong>Ethical</strong></td><td>Do what is right and fair even when not legally required</td><td>Fair wages, honest advertising, safe products</td></tr>
+      <tr><td><strong>Philanthropic</strong> (Top)</td><td>Give back voluntarily — be a "good corporate citizen"</td><td>Build schools, fund NGOs, employee volunteering</td></tr>
+    </table>
+    
+    <div class="sec">Triple Bottom Line — John Elkington (1994)</div>
+    <div class="diagram-wrap">
+      <svg width="400" height="200" viewBox="0 0 400 200">
+        <circle cx="200" cy="80" r="60" fill="#dbeafe" opacity="0.7"/>
+        <circle cx="145" cy="150" r="60" fill="#dcfce7" opacity="0.7"/>
+        <circle cx="255" cy="150" r="60" fill="#fef9c3" opacity="0.7"/>
+        <text x="200" y="84" text-anchor="middle" font-size="13" font-weight="700" fill="#1d4ed8">PEOPLE</text>
+        <text x="200" y="100" text-anchor="middle" font-size="10" fill="#1e40af">Social equity</text>
+        <text x="145" y="168" text-anchor="middle" font-size="13" font-weight="700" fill="#15803d">PLANET</text>
+        <text x="145" y="184" text-anchor="middle" font-size="10" fill="#166534">Environment</text>
+        <text x="255" y="168" text-anchor="middle" font-size="13" font-weight="700" fill="#854d0e">PROFIT</text>
+        <text x="255" y="184" text-anchor="middle" font-size="10" fill="#92400e">Economic viability</text>
+        <text x="200" y="136" text-anchor="middle" font-size="11" font-weight="700" fill="#374151">SUSTAINABILITY</text>
+      </svg>
+    </div>
+    
+    <div class="sec">Key Distinctions — CSR vs. Strategic CSR vs. CSV</div>
+    <table class="styled-table">
+      <tr><th>Concept</th><th>Nature</th><th>View of profit</th><th>Example</th></tr>
+      <tr><td><strong>Traditional CSR</strong></td><td>Philanthropic add-on, reactive</td><td>Cost / obligation</td><td>Company donates to charity</td></tr>
+      <tr><td><strong>Strategic CSR</strong></td><td>Integrated into strategy</td><td>Source of competitive advantage</td><td>HUL Project Shakti — rural women as distributors</td></tr>
+      <tr><td><strong>CSV (Porter &amp; Kramer 2011)</strong></td><td>Social good IS the business model</td><td>Social value = economic value</td><td>Microfinance: profitable AND serves poor communities</td></tr>
+    </table>
+    
+    <div class="exam-box">
+      <div class="exam-box-title">⭐ India: Companies Act 2013 — Section 135</div>
+      <p><strong>India was among the first countries to make CSR LEGALLY MANDATORY.</strong><br>Applies to: Net worth ≥ ₹500 crore OR Turnover ≥ ₹1000 crore OR Net profit ≥ ₹5 crore.<br>Must spend: <strong>2% of average net profits</strong> (last 3 years) on eligible CSR activities.<br>Must form: Board-level CSR Committee. Unspent funds → special account.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ─── PESTEL ─── -->
+<div id="card-pestel" class="concept-card">
+  <div class="card">
+    <div class="card-title">🌐 PESTEL Framework</div>
+    <div class="card-sub"><span class="tag">Module 2</span></div>
+    <div class="diagram-wrap">
+      <svg width="640" height="180" viewBox="0 0 640 180">
+        <!-- Hexagon arrangement -->
+        <rect x="10" y="20" width="95" height="75" rx="10" fill="#dbeafe" stroke="#2563eb"/>
+        <text x="57" y="48" text-anchor="middle" font-size="18">🏛️</text>
+        <text x="57" y="68" text-anchor="middle" font-size="13" font-weight="700" fill="#1d4ed8">Political</text>
+        <text x="57" y="84" text-anchor="middle" font-size="9" fill="#1e40af">Policy · Trade</text>
+        
+        <rect x="115" y="20" width="95" height="75" rx="10" fill="#fef3c7" stroke="#d97706"/>
+        <text x="162" y="48" text-anchor="middle" font-size="18">📈</text>
+        <text x="162" y="68" text-anchor="middle" font-size="13" font-weight="700" fill="#92400e">Economic</text>
+        <text x="162" y="84" text-anchor="middle" font-size="9" fill="#b45309">GDP · Inflation · FX</text>
+        
+        <rect x="220" y="20" width="95" height="75" rx="10" fill="#f3e8ff" stroke="#7c3aed"/>
+        <text x="267" y="48" text-anchor="middle" font-size="18">👥</text>
+        <text x="267" y="68" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">Social</text>
+        <text x="267" y="84" text-anchor="middle" font-size="9" fill="#7c3aed">Culture · Demographics</text>
+        
+        <rect x="325" y="20" width="95" height="75" rx="10" fill="#dcfce7" stroke="#15803d"/>
+        <text x="372" y="48" text-anchor="middle" font-size="18">💻</text>
+        <text x="372" y="68" text-anchor="middle" font-size="13" font-weight="700" fill="#14532d">Tech</text>
+        <text x="372" y="84" text-anchor="middle" font-size="9" fill="#166534">R&amp;D · AI · Automation</text>
+        
+        <rect x="430" y="20" width="95" height="75" rx="10" fill="#d1fae5" stroke="#059669"/>
+        <text x="477" y="48" text-anchor="middle" font-size="18">🌿</text>
+        <text x="477" y="68" text-anchor="middle" font-size="13" font-weight="700" fill="#065f46">Environ.</text>
+        <text x="477" y="84" text-anchor="middle" font-size="9" fill="#047857">Climate · ESG · Carbon</text>
+        
+        <rect x="535" y="20" width="95" height="75" rx="10" fill="#fee2e2" stroke="#dc2626"/>
+        <text x="582" y="48" text-anchor="middle" font-size="18">⚖️</text>
+        <text x="582" y="68" text-anchor="middle" font-size="13" font-weight="700" fill="#b91c1c">Legal</text>
+        <text x="582" y="84" text-anchor="middle" font-size="9" fill="#dc2626">Employment · IP · Safety</text>
+        
+        <text x="320" y="145" text-anchor="middle" font-size="13" fill="#6b7280" font-style="italic">Used to scan the MACRO-ENVIRONMENT — factors outside the firm's control</text>
+      </svg>
+    </div>
+    <div class="tip-box">💡 PESTEL is your <strong>external environment scanner</strong>. It feeds into your SWOT Opportunities and Threats. Always use PESTEL BEFORE Porter's 5 Forces.</div>
+  </div>
+</div>
+
+<!-- ─── PORTER 5 FORCES ─── -->
+<div id="card-porter5" class="concept-card">
+  <div class="card">
+    <div class="card-title">⚡ Porter's Five Forces + The 6th Force</div>
+    <div class="card-sub"><span class="tag">Module 2</span><span class="tag orange">Core Tool — Apply to ANY Industry Case</span></div>
+    <p style="font-size:14px;">Michael Porter (1979). Purpose: Assess the <strong>attractiveness and profitability potential</strong> of an INDUSTRY. Note: This is an industry-level tool, not firm-level.</p>
+    
+    <div class="sec">The Five Forces Diagram</div>
+    <div class="diagram-wrap">
+      <svg width="640" height="380" viewBox="0 0 640 380">
+        <!-- Center: Industry Rivalry -->
+        <rect x="220" y="155" width="200" height="70" rx="10" fill="#1d4ed8"/>
+        <text x="320" y="182" text-anchor="middle" font-size="13" font-weight="700" fill="white">INDUSTRY RIVALRY</text>
+        <text x="320" y="200" text-anchor="middle" font-size="11" fill="#bfdbfe">Competition intensity</text>
+        <text x="320" y="216" text-anchor="middle" font-size="10" fill="#93c5fd">HIGH when: many competitors,</text>
+        
+        <!-- Top: New Entrants -->
+        <rect x="220" y="20" width="200" height="60" rx="10" fill="#7c3aed"/>
+        <text x="320" y="44" text-anchor="middle" font-size="12" font-weight="700" fill="white">THREAT OF NEW</text>
+        <text x="320" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="white">ENTRANTS</text>
+        <text x="320" y="74" text-anchor="middle" font-size="10" fill="#ddd6fe">Barriers to entry</text>
+        <line x1="320" y1="80" x2="320" y2="155" stroke="#7c3aed" stroke-width="2.5" marker-end="url(#arr)"/>
+        
+        <!-- Bottom: Substitutes -->
+        <rect x="220" y="300" width="200" height="60" rx="10" fill="#dc2626"/>
+        <text x="320" y="324" text-anchor="middle" font-size="12" font-weight="700" fill="white">THREAT OF</text>
+        <text x="320" y="340" text-anchor="middle" font-size="12" font-weight="700" fill="white">SUBSTITUTES</text>
+        <text x="320" y="356" text-anchor="middle" font-size="10" fill="#fecaca">Products from OTHER industries</text>
+        <line x1="320" y1="300" x2="320" y2="225" stroke="#dc2626" stroke-width="2.5"/>
+        
+        <!-- Left: Suppliers -->
+        <rect x="20" y="160" width="175" height="60" rx="10" fill="#0369a1"/>
+        <text x="107" y="184" text-anchor="middle" font-size="12" font-weight="700" fill="white">BARGAINING POWER</text>
+        <text x="107" y="200" text-anchor="middle" font-size="12" font-weight="700" fill="white">OF SUPPLIERS</text>
+        <text x="107" y="214" text-anchor="middle" font-size="9" fill="#bae6fd">Controls inputs &amp; prices</text>
+        <line x1="195" y1="190" x2="220" y2="190" stroke="#0369a1" stroke-width="2.5"/>
+        
+        <!-- Right: Buyers -->
+        <rect x="445" y="160" width="175" height="60" rx="10" fill="#0e7490"/>
+        <text x="532" y="184" text-anchor="middle" font-size="12" font-weight="700" fill="white">BARGAINING POWER</text>
+        <text x="532" y="200" text-anchor="middle" font-size="12" font-weight="700" fill="white">OF BUYERS</text>
+        <text x="532" y="214" text-anchor="middle" font-size="9" fill="#a5f3fc">Controls prices &amp; volume</text>
+        <line x1="420" y1="190" x2="445" y2="190" stroke="#0e7490" stroke-width="2.5"/>
+        
+        <!-- 6th Force: Complementors -->
+        <rect x="450" y="295" width="175" height="60" rx="10" fill="#15803d" stroke="#15803d"/>
+        <text x="537" y="319" text-anchor="middle" font-size="12" font-weight="700" fill="white">6th: COMPLEMENTORS</text>
+        <text x="537" y="335" text-anchor="middle" font-size="11" fill="#dcfce7">Products that INCREASE</text>
+        <text x="537" y="349" text-anchor="middle" font-size="10" fill="#bbf7d0">your product's value</text>
+        <line x1="450" y1="325" x2="420" y2="225" stroke="#15803d" stroke-width="2" stroke-dasharray="6"/>
+        <text x="435" y="358" font-size="10" fill="#15803d">Brandenburger &amp; Nalebuff (1996)</text>
+      </svg>
+    </div>
+    
+    <table class="styled-table">
+      <tr><th>Force</th><th>HIGH (Unattractive) when…</th><th>LOW (Attractive) when…</th></tr>
+      <tr><td><strong>New Entrants</strong></td><td>Low capital, no patents, easy entry</td><td>High capital, patents, brand loyalty, regulations</td></tr>
+      <tr><td><strong>Supplier Power</strong></td><td>Few suppliers, critical inputs, can forward integrate</td><td>Many suppliers, commoditised inputs, easily switched</td></tr>
+      <tr><td><strong>Buyer Power</strong></td><td>Few large buyers, volume purchases, standardised products</td><td>Many small buyers, highly differentiated products</td></tr>
+      <tr><td><strong>Substitutes</strong></td><td>Easy to substitute, low switching cost</td><td>High switching cost, no functional alternatives</td></tr>
+      <tr><td><strong>Rivalry</strong></td><td>Many equal competitors, slow growth, low differentiation</td><td>Few competitors, rapid growth, high differentiation</td></tr>
+      <tr><td><strong>Complementors</strong></td><td>No complementors = product less valuable</td><td>Strong complementors = ecosystem adds value to your product</td></tr>
+    </table>
+    
+    <div class="case-box">
+      <div class="case-box-title">📱 Case: Apply to Smartphone Industry</div>
+      <p><strong>New Entrants:</strong> LOW threat — high R&D, manufacturing, brand investment needed</p>
+      <p><strong>Supplier Power:</strong> MEDIUM — TSMC/Samsung fab chips, Apple/Android OSes have some power</p>
+      <p><strong>Buyer Power:</strong> MEDIUM — consumers can switch brands easily</p>
+      <p><strong>Substitutes:</strong> LOW — no real substitute for smartphones in 2024</p>
+      <p><strong>Rivalry:</strong> HIGH — Apple, Samsung, Xiaomi, Oppo compete intensely</p>
+      <p><strong>Complementors:</strong> STRONG — App developers, accessory makers, cloud services all add value</p>
+    </div>
+  </div>
+</div>
+
+<!-- ─── VCA ─── -->
+<div id="card-vca" class="concept-card">
+  <div class="card">
+    <div class="card-title">🔗 Value Chain Analysis</div>
+    <div class="card-sub"><span class="tag">Module 2</span><span class="tag">Michael Porter, 1985 — Competitive Advantage</span></div>
+    
+    <div class="diagram-wrap">
+      <svg width="680" height="230" viewBox="0 0 680 230">
+        <!-- Support activities box (vertical) -->
+        <rect x="10" y="10" width="50" height="185" rx="6" fill="#f3e8ff" stroke="#7c3aed"/>
+        <text x="35" y="48" text-anchor="middle" font-size="9" font-weight="700" fill="#6d28d9" transform="rotate(-90,35,103)">SUPPORT ACTIVITIES →</text>
+        
+        <!-- Support rows -->
+        <rect x="65" y="10" width="600" height="38" rx="0" fill="#f3e8ff" stroke="#7c3aed" stroke-width="0.5"/>
+        <text x="365" y="34" text-anchor="middle" font-size="11" font-weight="700" fill="#6d28d9">🏢 FIRM INFRASTRUCTURE (Finance · Legal · Management · Planning)</text>
+        
+        <rect x="65" y="50" width="600" height="36" rx="0" fill="#e9d5ff" stroke="#7c3aed" stroke-width="0.5"/>
+        <text x="365" y="73" text-anchor="middle" font-size="11" font-weight="700" fill="#6d28d9">👥 HUMAN RESOURCE MANAGEMENT (Recruit · Train · Compensate)</text>
+        
+        <rect x="65" y="88" width="600" height="36" rx="0" fill="#f3e8ff" stroke="#7c3aed" stroke-width="0.5"/>
+        <text x="365" y="111" text-anchor="middle" font-size="11" font-weight="700" fill="#6d28d9">💡 TECHNOLOGY DEVELOPMENT (R&amp;D · Innovation · IT Systems)</text>
+        
+        <rect x="65" y="126" width="600" height="36" rx="0" fill="#e9d5ff" stroke="#7c3aed" stroke-width="0.5"/>
+        <text x="365" y="149" text-anchor="middle" font-size="11" font-weight="700" fill="#6d28d9">📦 PROCUREMENT (Buying inputs · Supplier relationships)</text>
+        
+        <!-- Primary activities -->
+        <rect x="65" y="170" width="117" height="42" rx="0" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+        <text x="123" y="190" text-anchor="middle" font-size="10" font-weight="700" fill="#1d4ed8">Inbound</text>
+        <text x="123" y="204" text-anchor="middle" font-size="10" font-weight="700" fill="#1d4ed8">Logistics</text>
+        
+        <rect x="184" y="170" width="117" height="42" rx="0" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.5"/>
+        <text x="242" y="195" text-anchor="middle" font-size="10" font-weight="700" fill="#1d4ed8">Operations</text>
+        
+        <rect x="303" y="170" width="117" height="42" rx="0" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+        <text x="361" y="190" text-anchor="middle" font-size="10" font-weight="700" fill="#1d4ed8">Outbound</text>
+        <text x="361" y="204" text-anchor="middle" font-size="10" font-weight="700" fill="#1d4ed8">Logistics</text>
+        
+        <rect x="422" y="170" width="117" height="42" rx="0" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.5"/>
+        <text x="480" y="190" text-anchor="middle" font-size="10" font-weight="700" fill="#1d4ed8">Marketing</text>
+        <text x="480" y="204" text-anchor="middle" font-size="10" font-weight="700" fill="#1d4ed8">&amp; Sales</text>
+        
+        <rect x="541" y="170" width="124" height="42" rx="0" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+        <text x="603" y="195" text-anchor="middle" font-size="10" font-weight="700" fill="#1d4ed8">Service</text>
+        
+        <!-- Labels -->
+        <text x="10" y="225" font-size="10" fill="#6b7280">← PRIMARY ACTIVITIES →</text>
+        <text x="550" y="225" font-size="11" font-weight="700" fill="#1d4ed8">→ MARGIN</text>
+      </svg>
+    </div>
+    
+    <div class="tip-box">💡 <strong>MARGIN = Total Value Created − Total Cost of all activities.</strong> Find where you can reduce cost (Cost Advantage) OR add uniqueness (Differentiation Advantage).</div>
+    
+    <div class="case-box">
+      <div class="case-box-title">🛒 Case: Walmart's VCA (Cost Leadership Example)</div>
+      <p><strong>Inbound Logistics:</strong> Cross-docking warehouses, direct supplier relationships, just-in-time delivery → massive cost savings</p>
+      <p><strong>Operations:</strong> Standardised store layouts, RFID inventory tracking → efficient</p>
+      <p><strong>Technology:</strong> Proprietary Retail Link system shares real-time sales data with suppliers → reduces waste</p>
+      <p><strong>Result:</strong> Every part of the value chain optimised for LOWEST COST → passes savings to customers → competitive advantage</p>
+    </div>
+  </div>
+</div>
+
+<!-- ─── SWOT ─── -->
+<div id="card-swot" class="concept-card">
+  <div class="card">
+    <div class="card-title">🎯 SWOT Analysis &amp; TOWS Matrix</div>
+    <div class="card-sub"><span class="tag">Module 2</span></div>
+    
+    <div class="diagram-wrap">
+      <svg width="560" height="280" viewBox="0 0 560 280">
+        <!-- Grid headers -->
+        <text x="200" y="30" text-anchor="middle" font-size="12" font-weight="700" fill="#15803d">STRENGTHS (S) — Internal</text>
+        <text x="420" y="30" text-anchor="middle" font-size="12" font-weight="700" fill="#dc2626">WEAKNESSES (W) — Internal</text>
+        <text x="40" y="115" text-anchor="middle" font-size="11" font-weight="700" fill="#1d4ed8" transform="rotate(-90,40,120)">OPPORTUNITIES (O)</text>
+        <text x="20" y="215" text-anchor="middle" font-size="11" font-weight="700" fill="#d97706" transform="rotate(-90,20,220)">THREATS (T)</text>
+        
+        <!-- SO -->
+        <rect x="80" y="50" width="240" height="100" rx="8" fill="#dcfce7" stroke="#15803d" stroke-width="1.5"/>
+        <text x="200" y="78" text-anchor="middle" font-size="13" font-weight="800" fill="#14532d">SO Strategies</text>
+        <text x="200" y="96" text-anchor="middle" font-size="11" fill="#166534">Maxi-Maxi</text>
+        <text x="200" y="112" text-anchor="middle" font-size="11" fill="#166534">AGGRESSIVE</text>
+        <text x="200" y="130" text-anchor="middle" font-size="10" fill="#15803d">Use strengths to</text>
+        <text x="200" y="144" text-anchor="middle" font-size="10" fill="#15803d">exploit opportunities</text>
+        
+        <!-- WO -->
+        <rect x="330" y="50" width="220" height="100" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+        <text x="440" y="78" text-anchor="middle" font-size="13" font-weight="800" fill="#92400e">WO Strategies</text>
+        <text x="440" y="96" text-anchor="middle" font-size="11" fill="#b45309">Mini-Maxi</text>
+        <text x="440" y="112" text-anchor="middle" font-size="11" fill="#b45309">TURNAROUND</text>
+        <text x="440" y="130" text-anchor="middle" font-size="10" fill="#d97706">Fix weaknesses using</text>
+        <text x="440" y="144" text-anchor="middle" font-size="10" fill="#d97706">opportunities</text>
+        
+        <!-- ST -->
+        <rect x="80" y="165" width="240" height="100" rx="8" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1.5"/>
+        <text x="200" y="193" text-anchor="middle" font-size="13" font-weight="800" fill="#1e3a8a">ST Strategies</text>
+        <text x="200" y="211" text-anchor="middle" font-size="11" fill="#1d4ed8">Maxi-Mini</text>
+        <text x="200" y="227" text-anchor="middle" font-size="11" fill="#1d4ed8">COMPETITIVE</text>
+        <text x="200" y="245" text-anchor="middle" font-size="10" fill="#2563eb">Use strengths to</text>
+        <text x="200" y="259" text-anchor="middle" font-size="10" fill="#2563eb">neutralise threats</text>
+        
+        <!-- WT -->
+        <rect x="330" y="165" width="220" height="100" rx="8" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+        <text x="440" y="193" text-anchor="middle" font-size="13" font-weight="800" fill="#7f1d1d">WT Strategies</text>
+        <text x="440" y="211" text-anchor="middle" font-size="11" fill="#b91c1c">Mini-Mini</text>
+        <text x="440" y="227" text-anchor="middle" font-size="11" fill="#b91c1c">DEFENSIVE</text>
+        <text x="440" y="245" text-anchor="middle" font-size="10" fill="#dc2626">Minimise weaknesses,</text>
+        <text x="440" y="259" text-anchor="middle" font-size="10" fill="#dc2626">avoid threats</text>
+      </svg>
+    </div>
+    <div class="tip-box">💡 <strong>SWOT is diagnostic</strong> (what do we have?). <strong>TOWS is prescriptive</strong> (what should we do?). In case study exams, you need BOTH — first identify S/W/O/T, then generate SO/WO/ST/WT strategies.</div>
+  </div>
+</div>
+
+<!-- ─── SCENARIO ANALYSIS ─── -->
+<div id="card-scenario" class="concept-card">
+  <div class="card">
+    <div class="card-title">🌊 Scenario Analysis</div>
+    <div class="card-sub"><span class="tag">Module 2</span></div>
+    <p style="font-size:14px;">NOT a forecast, NOT a vision — qualitative narratives of POSSIBLE futures. Famous use: Shell correctly anticipated the 1970s oil crisis.</p>
+    
+    <div class="diagram-wrap">
+      <svg width="640" height="160" viewBox="0 0 640 160">
+        <!-- Steps -->
+        <rect x="10" y="40" width="85" height="60" rx="8" fill="#7c3aed"/>
+        <text x="52" y="64" text-anchor="middle" font-size="10" font-weight="700" fill="white">1. Define</text>
+        <text x="52" y="78" text-anchor="middle" font-size="9" fill="#e9d5ff">Problem</text>
+        <text x="52" y="90" text-anchor="middle" font-size="9" fill="#e9d5ff">Time frame</text>
+        
+        <text x="103" y="73" text-anchor="middle" font-size="18" fill="#9ca3af">→</text>
+        
+        <rect x="110" y="40" width="85" height="60" rx="8" fill="#1d4ed8"/>
+        <text x="152" y="64" text-anchor="middle" font-size="10" font-weight="700" fill="white">2. Identify</text>
+        <text x="152" y="78" text-anchor="middle" font-size="9" fill="#bfdbfe">Driving</text>
+        <text x="152" y="90" text-anchor="middle" font-size="9" fill="#bfdbfe">Forces</text>
+        
+        <text x="203" y="73" text-anchor="middle" font-size="18" fill="#9ca3af">→</text>
+        
+        <rect x="210" y="40" width="85" height="60" rx="8" fill="#0369a1"/>
+        <text x="252" y="64" text-anchor="middle" font-size="10" font-weight="700" fill="white">3. Find</text>
+        <text x="252" y="78" text-anchor="middle" font-size="9" fill="#bae6fd">Critical</text>
+        <text x="252" y="90" text-anchor="middle" font-size="9" fill="#bae6fd">Uncertainties</text>
+        
+        <text x="303" y="73" text-anchor="middle" font-size="18" fill="#9ca3af">→</text>
+        
+        <rect x="310" y="40" width="85" height="60" rx="8" fill="#0e7490"/>
+        <text x="352" y="64" text-anchor="middle" font-size="10" font-weight="700" fill="white">4. Build</text>
+        <text x="352" y="78" text-anchor="middle" font-size="9" fill="#a5f3fc">3 Scenarios</text>
+        <text x="352" y="90" text-anchor="middle" font-size="9" fill="#a5f3fc">(Best practice)</text>
+        
+        <text x="403" y="73" text-anchor="middle" font-size="18" fill="#9ca3af">→</text>
+        
+        <rect x="410" y="40" width="85" height="60" rx="8" fill="#15803d"/>
+        <text x="452" y="64" text-anchor="middle" font-size="10" font-weight="700" fill="white">5. Test</text>
+        <text x="452" y="78" text-anchor="middle" font-size="9" fill="#dcfce7">Strategies</text>
+        <text x="452" y="90" text-anchor="middle" font-size="9" fill="#dcfce7">vs. each</text>
+        
+        <text x="503" y="73" text-anchor="middle" font-size="18" fill="#9ca3af">→</text>
+        
+        <rect x="510" y="40" width="115" height="60" rx="8" fill="#854d0e"/>
+        <text x="567" y="64" text-anchor="middle" font-size="10" font-weight="700" fill="white">6. Select Most</text>
+        <text x="567" y="78" text-anchor="middle" font-size="9" fill="#fef9c3">Robust Strategy</text>
+        <text x="567" y="90" text-anchor="middle" font-size="9" fill="#fef9c3">(works in all 3)</text>
+        
+        <text x="320" y="148" text-anchor="middle" font-size="11" fill="#6b7280">Why 3 scenarios? 2 = binary good/bad. 4+ = unmanageable. 3 = Goldilocks.</text>
+      </svg>
+    </div>
+    
+    <table class="styled-table">
+      <tr><th></th><th>Sensitivity Analysis</th><th>Scenario Analysis</th></tr>
+      <tr><td><strong>Variables changed</strong></td><td>ONE at a time</td><td>MULTIPLE simultaneously</td></tr>
+      <tr><td><strong>Nature</strong></td><td>Quantitative (numbers)</td><td>Qualitative (narratives)</td></tr>
+      <tr><td><strong>Best for</strong></td><td>Operational financial planning</td><td>Long-term strategic foresight in VUCA</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ─── VUCA ─── -->
+<div id="card-vuca" class="concept-card">
+  <div class="card">
+    <div class="card-title">🌪️ VUCA World</div>
+    <div class="card-sub"><span class="tag">Module 2</span><span class="tag orange">Key — connects to RBV exam question</span></div>
+    <p style="font-size:14px;">Coined by the <strong>US Military in the late 1990s</strong> to describe the post-Cold War environment. Now the dominant lens for understanding modern business environments.</p>
+    
+    <div class="diagram-wrap">
+      <svg width="600" height="220" viewBox="0 0 600 220">
+        <rect x="10" y="10" width="130" height="195" rx="12" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+        <text x="75" y="40" text-anchor="middle" font-size="22">⚡</text>
+        <text x="75" y="65" text-anchor="middle" font-size="16" font-weight="800" fill="#dc2626">V</text>
+        <text x="75" y="83" text-anchor="middle" font-size="12" font-weight="700" fill="#7f1d1d">Volatility</text>
+        <text x="75" y="105" text-anchor="middle" font-size="10" fill="#991b1b">Rapid, unpredictable</text>
+        <text x="75" y="119" text-anchor="middle" font-size="10" fill="#991b1b">rate of change</text>
+        <text x="75" y="150" text-anchor="middle" font-size="10" fill="#b91c1c" font-weight="600">Leader response:</text>
+        <text x="75" y="165" text-anchor="middle" font-size="10" fill="#dc2626">Act quickly</text>
+        <text x="75" y="179" text-anchor="middle" font-size="10" fill="#dc2626">Be agile</text>
+        
+        <rect x="155" y="10" width="130" height="195" rx="12" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+        <text x="220" y="40" text-anchor="middle" font-size="22">❓</text>
+        <text x="220" y="65" text-anchor="middle" font-size="16" font-weight="800" fill="#d97706">U</text>
+        <text x="220" y="83" text-anchor="middle" font-size="12" font-weight="700" fill="#92400e">Uncertainty</text>
+        <text x="220" y="105" text-anchor="middle" font-size="10" fill="#78350f">Lack of predictability</text>
+        <text x="220" y="119" text-anchor="middle" font-size="10" fill="#78350f">incomplete information</text>
+        <text x="220" y="150" text-anchor="middle" font-size="10" fill="#b45309" font-weight="600">Leader response:</text>
+        <text x="220" y="165" text-anchor="middle" font-size="10" fill="#d97706">Act on incomplete</text>
+        <text x="220" y="179" text-anchor="middle" font-size="10" fill="#d97706">data decisively</text>
+        
+        <rect x="300" y="10" width="130" height="195" rx="12" fill="#f3e8ff" stroke="#7c3aed" stroke-width="2"/>
+        <text x="365" y="40" text-anchor="middle" font-size="22">🕸️</text>
+        <text x="365" y="65" text-anchor="middle" font-size="16" font-weight="800" fill="#7c3aed">C</text>
+        <text x="365" y="83" text-anchor="middle" font-size="12" font-weight="700" fill="#4c1d95">Complexity</text>
+        <text x="365" y="105" text-anchor="middle" font-size="10" fill="#4c1d95">Multiple interrelated</text>
+        <text x="365" y="119" text-anchor="middle" font-size="10" fill="#4c1d95">interconnected factors</text>
+        <text x="365" y="150" text-anchor="middle" font-size="10" fill="#6d28d9" font-weight="600">Leader response:</text>
+        <text x="365" y="165" text-anchor="middle" font-size="10" fill="#7c3aed">Manage webs of</text>
+        <text x="365" y="179" text-anchor="middle" font-size="10" fill="#7c3aed">interrelated issues</text>
+        
+        <rect x="445" y="10" width="145" height="195" rx="12" fill="#dcfce7" stroke="#15803d" stroke-width="2"/>
+        <text x="517" y="40" text-anchor="middle" font-size="22">🌫️</text>
+        <text x="517" y="65" text-anchor="middle" font-size="16" font-weight="800" fill="#15803d">A</text>
+        <text x="517" y="83" text-anchor="middle" font-size="12" font-weight="700" fill="#14532d">Ambiguity</text>
+        <text x="517" y="105" text-anchor="middle" font-size="10" fill="#14532d">Mixed meanings</text>
+        <text x="517" y="119" text-anchor="middle" font-size="10" fill="#14532d">unclear cause-effect</text>
+        <text x="517" y="150" text-anchor="middle" font-size="10" fill="#166534" font-weight="600">Leader response:</text>
+        <text x="517" y="165" text-anchor="middle" font-size="10" fill="#15803d">Read signals early</text>
+        <text x="517" y="179" text-anchor="middle" font-size="10" fill="#15803d">use tacit knowledge</text>
+      </svg>
+    </div>
+    
+    <div class="exam-box">
+      <div class="exam-box-title">⭐ PROFESSOR'S EXAM QUESTION: How is RBV related to VUCA?</div>
+      <p><strong>Point 1:</strong> VUCA makes RBV MORE relevant — in stable environments, Porter's external positioning suffices. But in VUCA, entire industries are disrupted overnight (Netflix vs. Blockbuster). External positions become fragile. Internal resources (RBV) are more durable and portable across contexts.</p>
+      <p style="margin-top:6px;"><strong>Point 2:</strong> VUCA amplifies VRIO value — under Volatility, rare resources extend time advantage. Under Ambiguity, firms with deep TACIT knowledge (intangible RBV resources) can "read" unclear signals faster than rivals.</p>
+      <p style="margin-top:6px;"><strong>Point 3:</strong> Dynamic Capabilities = RBV adapted for VUCA — continuously SENSE change, SEIZE opportunities, RECONFIGURE internal resources. This is RBV in action within VUCA context.</p>
+      <p style="margin-top:6px;"><strong>Conclusion:</strong> VUCA describes the context; RBV/VRIO prescribes the internal response. Both are complementary — not competing theories.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ─── RBV ─── -->
+<div id="card-rbv" class="concept-card">
+  <div class="card">
+    <div class="card-title">💎 Resource-Based View (RBV) &amp; VRIO</div>
+    <div class="card-sub"><span class="tag">Module 2</span><span class="tag orange">Professor's Exam Question</span></div>
+    
+    <div class="sec">VRIO Flowchart</div>
+    <div class="diagram-wrap">
+      <svg width="680" height="230" viewBox="0 0 680 230">
+        <!-- Resource box -->
+        <rect x="270" y="5" width="140" height="36" rx="8" fill="#374151"/>
+        <text x="340" y="28" text-anchor="middle" font-size="12" font-weight="700" fill="white">Resource / Capability</text>
+        
+        <!-- V -->
+        <line x1="340" y1="41" x2="340" y2="60" stroke="#4b5563" stroke-width="2"/>
+        <rect x="245" y="60" width="190" height="35" rx="8" fill="#1d4ed8"/>
+        <text x="340" y="82" text-anchor="middle" font-size="12" font-weight="700" fill="white">VALUABLE?</text>
+        
+        <text x="445" y="82" font-size="11" fill="#dc2626">→ NO → </text>
+        <rect x="490" y="62" width="175" height="32" rx="6" fill="#fee2e2" stroke="#dc2626"/>
+        <text x="577" y="83" text-anchor="middle" font-size="11" fill="#dc2626" font-weight="700">COMPETITIVE DISADVANTAGE</text>
+        
+        <!-- R -->
+        <line x1="340" y1="95" x2="340" y2="115" stroke="#4b5563" stroke-width="2"/>
+        <rect x="245" y="115" width="190" height="35" rx="8" fill="#0369a1"/>
+        <text x="340" y="137" text-anchor="middle" font-size="12" font-weight="700" fill="white">RARE?</text>
+        
+        <text x="445" y="137" font-size="11" fill="#d97706">→ NO → </text>
+        <rect x="490" y="117" width="165" height="32" rx="6" fill="#fef3c7" stroke="#d97706"/>
+        <text x="572" y="138" text-anchor="middle" font-size="11" fill="#d97706" font-weight="700">COMPETITIVE PARITY</text>
+        
+        <!-- I -->
+        <line x1="340" y1="150" x2="340" y2="170" stroke="#4b5563" stroke-width="2"/>
+        <rect x="230" y="170" width="220" height="35" rx="8" fill="#059669"/>
+        <text x="340" y="192" text-anchor="middle" font-size="12" font-weight="700" fill="white">INIMITABLE? (Costly to copy)</text>
+        
+        <text x="460" y="192" font-size="11" fill="#f97316">→ NO → </text>
+        <rect x="490" y="172" width="180" height="32" rx="6" fill="#ffedd5" stroke="#f97316"/>
+        <text x="580" y="193" text-anchor="middle" font-size="11" fill="#f97316" font-weight="700">TEMPORARY ADVANTAGE</text>
+        
+        <!-- O -->
+        <line x1="340" y1="205" x2="340" y2="218" stroke="#4b5563" stroke-width="2"/>
+        <rect x="240" y="215" width="200" height="14" rx="6" fill="#7c3aed"/>
+        <text x="340" y="226" text-anchor="middle" font-size="10" font-weight="700" fill="white">ORGANIZED to exploit?  →  SUSTAINED COMPETITIVE ADVANTAGE ✓</text>
+      </svg>
+    </div>
+    
+    <div class="sec">Two Foundational Properties of RBV Resources</div>
+    <table class="styled-table">
+      <tr><th>Property</th><th>Meaning</th><th>Why It Matters</th></tr>
+      <tr><td><strong>HETEROGENEOUS</strong></td><td>Different firms possess different resource bundles</td><td>Not all firms have the same quality of resources — some genuinely have better ones</td></tr>
+      <tr><td><strong>IMMOBILE</strong></td><td>Resources don't freely flow between firms</td><td>You can't just buy what makes a rival special — resources are "sticky"</td></tr>
+    </table>
+    
+    <div class="tip-box">💡 If resources were homogeneous AND mobile, any firm could copy any other instantly → no sustained advantage possible. These two properties explain WHY competitive advantage can last.</div>
+    
+    <div class="sec">What Makes a Resource Costly to Imitate? (3 Reasons)</div>
+    <ul class="bullet-list">
+      <li><strong>Unique Historical Conditions</strong> — firm was in the right place at the right time (path dependency — cannot be replicated)</li>
+      <li><strong>Causal Ambiguity</strong> — even if rivals CAN SEE the resource, they can't figure out WHY it works</li>
+      <li><strong>Social Complexity</strong> — involves trust, culture, relationships — impossible to simply copy by hiring individuals</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ─── BLUE OCEAN ─── -->
+<div id="card-blueocean" class="concept-card">
+  <div class="card">
+    <div class="card-title">🏄 Red Ocean vs. Blue Ocean Strategy</div>
+    <div class="card-sub"><span class="tag">Module 2</span><span class="tag">Kim &amp; Mauborgne, 2005</span></div>
+    
+    <div class="diagram-wrap">
+      <svg width="600" height="200" viewBox="0 0 600 200">
+        <!-- Red Ocean -->
+        <rect x="10" y="10" width="265" height="180" rx="12" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+        <text x="142" y="40" text-anchor="middle" font-size="20">🩸</text>
+        <text x="142" y="68" text-anchor="middle" font-size="16" font-weight="800" fill="#dc2626">RED OCEAN</text>
+        <text x="142" y="88" text-anchor="middle" font-size="11" fill="#7f1d1d">Compete in existing industries</text>
+        <text x="142" y="108" text-anchor="middle" font-size="11" fill="#991b1b">Beat the competition HEAD-ON</text>
+        <text x="142" y="128" text-anchor="middle" font-size="11" fill="#b91c1c">Exploit EXISTING demand</text>
+        <text x="142" y="148" text-anchor="middle" font-size="11" fill="#dc2626">Choose: Value OR Cost</text>
+        <text x="142" y="168" text-anchor="middle" font-size="10" fill="#6b7280" font-style="italic">Porter's 5 Forces world</text>
+        
+        <text x="305" y="105" text-anchor="middle" font-size="30" fill="#6b7280">vs</text>
+        
+        <!-- Blue Ocean -->
+        <rect x="325" y="10" width="265" height="180" rx="12" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+        <text x="457" y="40" text-anchor="middle" font-size="20">🌊</text>
+        <text x="457" y="68" text-anchor="middle" font-size="16" font-weight="800" fill="#1d4ed8">BLUE OCEAN</text>
+        <text x="457" y="88" text-anchor="middle" font-size="11" fill="#1e3a8a">Create UNCONTESTED market space</text>
+        <text x="457" y="108" text-anchor="middle" font-size="11" fill="#1e40af">Make competition IRRELEVANT</text>
+        <text x="457" y="128" text-anchor="middle" font-size="11" fill="#1d4ed8">CREATE new demand</text>
+        <text x="457" y="148" text-anchor="middle" font-size="11" fill="#2563eb">Value AND Cost simultaneously</text>
+        <text x="457" y="168" text-anchor="middle" font-size="10" fill="#6b7280" font-style="italic">Break the value-cost trade-off</text>
+      </svg>
+    </div>
+    
+    <div class="sec">The ERRC Framework (Four Actions)</div>
+    <div class="diagram-wrap">
+      <svg width="560" height="120" viewBox="0 0 560 120">
+        <rect x="10" y="10" width="125" height="100" rx="10" fill="#fee2e2" stroke="#dc2626"/>
+        <text x="72" y="40" text-anchor="middle" font-size="14" font-weight="800" fill="#dc2626">ELIMINATE</text>
+        <text x="72" y="60" text-anchor="middle" font-size="11" fill="#7f1d1d">Remove what the</text>
+        <text x="72" y="75" text-anchor="middle" font-size="11" fill="#7f1d1d">industry assumes</text>
+        <text x="72" y="90" text-anchor="middle" font-size="11" fill="#7f1d1d">is necessary</text>
+        
+        <rect x="143" y="10" width="115" height="100" rx="10" fill="#fef3c7" stroke="#d97706"/>
+        <text x="200" y="40" text-anchor="middle" font-size="14" font-weight="800" fill="#d97706">REDUCE</text>
+        <text x="200" y="60" text-anchor="middle" font-size="11" fill="#92400e">Cut factors well</text>
+        <text x="200" y="75" text-anchor="middle" font-size="11" fill="#92400e">below industry</text>
+        <text x="200" y="90" text-anchor="middle" font-size="11" fill="#92400e">standard</text>
+        
+        <rect x="266" y="10" width="115" height="100" rx="10" fill="#dcfce7" stroke="#15803d"/>
+        <text x="323" y="40" text-anchor="middle" font-size="14" font-weight="800" fill="#15803d">RAISE</text>
+        <text x="323" y="60" text-anchor="middle" font-size="11" fill="#14532d">Raise factors well</text>
+        <text x="323" y="75" text-anchor="middle" font-size="11" fill="#14532d">above industry</text>
+        <text x="323" y="90" text-anchor="middle" font-size="11" fill="#14532d">standard</text>
+        
+        <rect x="389" y="10" width="160" height="100" rx="10" fill="#dbeafe" stroke="#1d4ed8"/>
+        <text x="469" y="40" text-anchor="middle" font-size="14" font-weight="800" fill="#1d4ed8">CREATE</text>
+        <text x="469" y="60" text-anchor="middle" font-size="11" fill="#1e3a8a">Offer factors the</text>
+        <text x="469" y="75" text-anchor="middle" font-size="11" fill="#1e3a8a">industry has</text>
+        <text x="469" y="90" text-anchor="middle" font-size="11" fill="#1e3a8a">NEVER offered</text>
+      </svg>
+    </div>
+    
+    <div class="case-box">
+      <div class="case-box-title">🎪 Case: Cirque du Soleil — The Classic Blue Ocean</div>
+      <p><strong>ELIMINATE:</strong> Animals (expensive, controversial) · Multiple show arenas · Aisle concession sales</p>
+      <p><strong>REDUCE:</strong> Star performer cost · Danger/thrill (replaced by artistry)</p>
+      <p><strong>RAISE:</strong> Unique venue/tent experience · Production quality</p>
+      <p><strong>CREATE:</strong> Theme per show · Refined watching environment · Artistic + intellectual content (like theatre)</p>
+      <p><strong>Result:</strong> Created a new "theatrical circus" category — no longer competing with traditional circuses OR theatre. Revenue 22× in 10 years.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ─── BCG ─── -->
+<div id="card-bcg" class="concept-card">
+  <div class="card">
+    <div class="card-title">📊 BCG Matrix</div>
+    <div class="card-sub"><span class="tag">Module 3</span><span class="tag">Bruce Henderson, BCG, early 1970s</span><span class="tag orange">Portfolio Analysis</span></div>
+    
+    <div class="sec">The BCG Matrix Diagram</div>
+    <div class="diagram-wrap">
+      <svg width="580" height="380" viewBox="0 0 580 380">
+        <!-- Axes labels -->
+        <text x="290" y="18" text-anchor="middle" font-size="11" font-weight="700" fill="#6b7280">MARKET GROWTH RATE</text>
+        <text x="17" y="200" text-anchor="middle" font-size="11" font-weight="700" fill="#6b7280" transform="rotate(-90,17,200)">RELATIVE MARKET SHARE</text>
+        <text x="160" y="375" text-anchor="middle" font-size="10" fill="#6b7280">HIGH ←</text>
+        <text x="420" y="375" text-anchor="middle" font-size="10" fill="#6b7280">→ LOW</text>
+        <text x="36" y="95" text-anchor="middle" font-size="10" fill="#6b7280">HIGH</text>
+        <text x="36" y="295" text-anchor="middle" font-size="10" fill="#6b7280">LOW</text>
+        
+        <!-- STARS (top-left: high share, high growth) -->
+        <rect x="55" y="30" width="230" height="170" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+        <text x="170" y="75" text-anchor="middle" font-size="32">⭐</text>
+        <text x="170" y="112" text-anchor="middle" font-size="17" font-weight="800" fill="#1d4ed8">STARS</text>
+        <text x="170" y="132" text-anchor="middle" font-size="11" fill="#1e40af">High Growth · High Share</text>
+        <text x="170" y="150" text-anchor="middle" font-size="11" fill="#2563eb">→ INVEST HEAVILY</text>
+        <text x="170" y="168" text-anchor="middle" font-size="10" fill="#3b82f6">Will become Cash Cows</text>
+        <text x="170" y="184" text-anchor="middle" font-size="10" fill="#3b82f6">when market matures</text>
+        
+        <!-- QUESTION MARKS (top-right: low share, high growth) -->
+        <rect x="295" y="30" width="275" height="170" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+        <text x="432" y="75" text-anchor="middle" font-size="32">❓</text>
+        <text x="432" y="112" text-anchor="middle" font-size="17" font-weight="800" fill="#d97706">QUESTION MARKS</text>
+        <text x="432" y="132" text-anchor="middle" font-size="11" fill="#92400e">High Growth · Low Share</text>
+        <text x="432" y="150" text-anchor="middle" font-size="11" fill="#d97706">→ INVEST or DIVEST</text>
+        <text x="432" y="168" text-anchor="middle" font-size="10" fill="#b45309">Uncertain future — need cash</text>
+        <text x="432" y="184" text-anchor="middle" font-size="10" fill="#b45309">Could become Stars or Dogs</text>
+        
+        <!-- CASH COWS (bottom-left: high share, low growth) -->
+        <rect x="55" y="210" width="230" height="150" rx="10" fill="#dcfce7" stroke="#15803d" stroke-width="2"/>
+        <text x="170" y="255" text-anchor="middle" font-size="32">💰</text>
+        <text x="170" y="290" text-anchor="middle" font-size="17" font-weight="800" fill="#15803d">CASH COWS</text>
+        <text x="170" y="310" text-anchor="middle" font-size="11" fill="#166534">Low Growth · High Share</text>
+        <text x="170" y="328" text-anchor="middle" font-size="11" fill="#15803d">→ HARVEST (milk them)</text>
+        <text x="170" y="347" text-anchor="middle" font-size="10" fill="#4d7c0f">Generate cash to fund Stars</text>
+        
+        <!-- DOGS (bottom-right: low share, low growth) -->
+        <rect x="295" y="210" width="275" height="150" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+        <text x="432" y="255" text-anchor="middle" font-size="32">🐕</text>
+        <text x="432" y="290" text-anchor="middle" font-size="17" font-weight="800" fill="#dc2626">DOGS</text>
+        <text x="432" y="310" text-anchor="middle" font-size="11" fill="#7f1d1d">Low Growth · Low Share</text>
+        <text x="432" y="328" text-anchor="middle" font-size="11" fill="#dc2626">→ DIVEST or LIQUIDATE</text>
+        <text x="432" y="347" text-anchor="middle" font-size="10" fill="#b91c1c">Cash drain — usually exit</text>
+        
+        <!-- Divider lines -->
+        <line x1="285" y1="30" x2="285" y2="360" stroke="#d1d5db" stroke-width="2" stroke-dasharray="6"/>
+        <line x1="55" y1="200" x2="570" y2="200" stroke="#d1d5db" stroke-width="2" stroke-dasharray="6"/>
+        
+        <!-- Cash flow arrow -->
+        <path d="M 170 210 Q 170 180 295 115" stroke="#15803d" stroke-width="2" fill="none" marker-end="url(#grnarr)" stroke-dasharray="6"/>
+        <text x="210" y="185" font-size="9" fill="#15803d">Cash Cows fund Stars</text>
+      </svg>
+    </div>
+    
+    <div class="sec">BCG linked to Product Life Cycle (PLC)</div>
+    <div class="diagram-wrap">
+      <svg width="580" height="100" viewBox="0 0 580 100">
+        <text x="75" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="#6b7280">Introduction</text>
+        <text x="220" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="#6b7280">Growth</text>
+        <text x="365" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="#6b7280">Maturity</text>
+        <text x="510" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="#6b7280">Decline</text>
+        <text x="75" y="52" text-anchor="middle" font-size="22">❓</text>
+        <text x="75" y="72" text-anchor="middle" font-size="11" fill="#d97706" font-weight="700">Question Mark</text>
+        <text x="145" y="52" text-anchor="middle" font-size="20" fill="#6b7280">→</text>
+        <text x="220" y="52" text-anchor="middle" font-size="22">⭐</text>
+        <text x="220" y="72" text-anchor="middle" font-size="11" fill="#1d4ed8" font-weight="700">Star</text>
+        <text x="295" y="52" text-anchor="middle" font-size="20" fill="#6b7280">→</text>
+        <text x="365" y="52" text-anchor="middle" font-size="22">💰</text>
+        <text x="365" y="72" text-anchor="middle" font-size="11" fill="#15803d" font-weight="700">Cash Cow</text>
+        <text x="440" y="52" text-anchor="middle" font-size="20" fill="#6b7280">→</text>
+        <text x="510" y="52" text-anchor="middle" font-size="22">🐕</text>
+        <text x="510" y="72" text-anchor="middle" font-size="11" fill="#dc2626" font-weight="700">Dog</text>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- ─── GE ─── -->
+<div id="card-ge" class="concept-card">
+  <div class="card">
+    <div class="card-title">🗂️ GE-McKinsey Nine Cell Matrix</div>
+    <div class="card-sub"><span class="tag">Module 3</span><span class="tag">McKinsey + GE, early 1970s</span><span class="tag orange">Portfolio Analysis</span></div>
+    
+    <div class="diagram-wrap">
+      <svg width="580" height="380" viewBox="0 0 580 380">
+        <!-- Y-axis label -->
+        <text x="15" y="220" text-anchor="middle" font-size="11" font-weight="700" fill="#374151" transform="rotate(-90,15,220)">INDUSTRY ATTRACTIVENESS (High → Low)</text>
+        <!-- X-axis label -->
+        <text x="330" y="372" text-anchor="middle" font-size="11" font-weight="700" fill="#374151">BUSINESS UNIT STRENGTH (Strong → Weak)</text>
+        
+        <!-- Column headers -->
+        <text x="167" y="52" text-anchor="middle" font-size="11" font-weight="700" fill="#374151">Strong</text>
+        <text x="330" y="52" text-anchor="middle" font-size="11" font-weight="700" fill="#374151">Medium</text>
+        <text x="493" y="52" text-anchor="middle" font-size="11" font-weight="700" fill="#374151">Weak</text>
+        
+        <!-- Row headers -->
+        <text x="52" y="133" text-anchor="end" font-size="11" font-weight="700" fill="#374151">High</text>
+        <text x="52" y="223" text-anchor="end" font-size="11" font-weight="700" fill="#374151">Medium</text>
+        <text x="52" y="313" text-anchor="end" font-size="11" font-weight="700" fill="#374151">Low</text>
+        
+        <!-- Cell 1 (Grow) -->
+        <rect x="60" y="62" width="215" height="110" rx="4" fill="#16a34a"/>
+        <text x="167" y="107" text-anchor="middle" font-size="13" font-weight="700" fill="white">Cell 1</text>
+        <text x="167" y="127" text-anchor="middle" font-size="11" fill="#dcfce7">INVEST / GROW</text>
+        <text x="167" y="145" text-anchor="middle" font-size="10" fill="#bbf7d0">Protect position</text>
+        
+        <!-- Cell 2 (Grow) -->
+        <rect x="278" y="62" width="215" height="110" rx="4" fill="#22c55e"/>
+        <text x="385" y="107" text-anchor="middle" font-size="13" font-weight="700" fill="white">Cell 2</text>
+        <text x="385" y="127" text-anchor="middle" font-size="11" fill="#dcfce7">INVEST SELECTIVELY</text>
+        <text x="385" y="145" text-anchor="middle" font-size="10" fill="#bbf7d0">Try harder</text>
+        
+        <!-- Cell 3 (Hold) -->
+        <rect x="496" y="62" width="76" height="110" rx="4" fill="#facc15"/>
+        <text x="534" y="107" text-anchor="middle" font-size="12" font-weight="700" fill="#713f12">Cell 3</text>
+        <text x="534" y="127" text-anchor="middle" font-size="9" fill="#713f12">SELECTIVE</text>
+        <text x="534" y="140" text-anchor="middle" font-size="9" fill="#713f12">INVEST</text>
+        <text x="534" y="153" text-anchor="middle" font-size="9" fill="#713f12">Be choosy</text>
+        
+        <!-- Cell 4 (Grow) -->
+        <rect x="60" y="175" width="215" height="100" rx="4" fill="#4ade80"/>
+        <text x="167" y="215" text-anchor="middle" font-size="13" font-weight="700" fill="#14532d">Cell 4</text>
+        <text x="167" y="233" text-anchor="middle" font-size="11" fill="#14532d">INVEST SELECTIVELY</text>
+        <text x="167" y="250" text-anchor="middle" font-size="10" fill="#166534">Grow with caution</text>
+        
+        <!-- Cell 5 (Hold) -->
+        <rect x="278" y="175" width="215" height="100" rx="4" fill="#fbbf24"/>
+        <text x="385" y="215" text-anchor="middle" font-size="13" font-weight="700" fill="#713f12">Cell 5</text>
+        <text x="385" y="233" text-anchor="middle" font-size="11" fill="#713f12">MANAGE SELECTIVELY</text>
+        <text x="385" y="250" text-anchor="middle" font-size="10" fill="#92400e">Defend current strengths</text>
+        
+        <!-- Cell 6 (Harvest) -->
+        <rect x="496" y="175" width="76" height="100" rx="4" fill="#ef4444"/>
+        <text x="534" y="215" text-anchor="middle" font-size="12" font-weight="700" fill="white">Cell 6</text>
+        <text x="534" y="233" text-anchor="middle" font-size="9" fill="white">HARVEST</text>
+        <text x="534" y="248" text-anchor="middle" font-size="9" fill="#fecaca">No new invest</text>
+        
+        <!-- Cell 7 (Hold) -->
+        <rect x="60" y="278" width="215" height="82" rx="4" fill="#a3e635"/>
+        <text x="167" y="312" text-anchor="middle" font-size="13" font-weight="700" fill="#365314">Cell 7</text>
+        <text x="167" y="330" text-anchor="middle" font-size="11" fill="#365314">SELECTIVE INVEST</text>
+        <text x="167" y="347" text-anchor="middle" font-size="10" fill="#4d7c0f">Protect niche</text>
+        
+        <!-- Cell 8 (Harvest) -->
+        <rect x="278" y="278" width="215" height="82" rx="4" fill="#f97316"/>
+        <text x="385" y="312" text-anchor="middle" font-size="13" font-weight="700" fill="white">Cell 8</text>
+        <text x="385" y="330" text-anchor="middle" font-size="11" fill="white">HARVEST</text>
+        <text x="385" y="347" text-anchor="middle" font-size="10" fill="#fed7aa">Manage for earnings</text>
+        
+        <!-- Cell 9 (Divest) -->
+        <rect x="496" y="278" width="76" height="82" rx="4" fill="#dc2626"/>
+        <text x="534" y="309" text-anchor="middle" font-size="12" font-weight="700" fill="white">Cell 9</text>
+        <text x="534" y="327" text-anchor="middle" font-size="11" fill="white">DIVEST</text>
+        <text x="534" y="344" text-anchor="middle" font-size="9" fill="#fecaca">Exit market</text>
+        
+        <!-- Legend -->
+        <rect x="60" y="362" width="14" height="10" fill="#16a34a"/>
+        <text x="80" y="371" font-size="10" fill="#374151">GREEN = Grow (Cells 1,2,4)</text>
+        <rect x="220" y="362" width="14" height="10" fill="#fbbf24"/>
+        <text x="240" y="371" font-size="10" fill="#374151">YELLOW = Hold (3,5,7)</text>
+        <rect x="370" y="362" width="14" height="10" fill="#dc2626"/>
+        <text x="390" y="371" font-size="10" fill="#374151">RED = Harvest/Divest (6,8,9)</text>
+      </svg>
+    </div>
+    
+    <div class="tip-box">💡 In GE Matrix: circle size = INDUSTRY size. The PIE SLICE inside the circle = company's market share in that industry. This is different from BCG where circle usually represents revenue.</div>
+  </div>
+</div>
+
+<!-- ─── BCG vs GE ─── -->
+<div id="card-bcgvge" class="concept-card">
+  <div class="card">
+    <div class="card-title">⚖️ BCG vs. GE-McKinsey — The Key Comparison</div>
+    <div class="card-sub"><span class="tag orange">★ PROFESSOR EXPLICITLY FLAGGED THIS QUESTION ★</span></div>
+    
+    <div class="sec">Similarities (Both are Portfolio Analysis tools)</div>
+    <ul class="bullet-list">
+      <li>Both help diversified companies manage and allocate resources across multiple SBUs</li>
+      <li>Both use a 2-dimensional matrix to evaluate SBUs</li>
+      <li>Both help decide where to Invest / Hold / Divest</li>
+      <li>Both were developed in the early 1970s as corporate-level planning tools</li>
+      <li>Both categorise SBUs into strategic groups with specific prescriptions</li>
+      <li>Both serve Corporate-Level strategy decisions</li>
+      <li>Both represent SBUs as circles on the matrix</li>
+    </ul>
+    
+    <div class="sec">Key Differences</div>
+    <table class="styled-table">
+      <tr><th>Feature</th><th>BCG Matrix</th><th>GE Nine-Cell Matrix</th></tr>
+      <tr><td>Developer</td><td>Boston Consulting Group</td><td>McKinsey + General Electric</td></tr>
+      <tr><td>Grid size</td><td>2×2 = 4 cells</td><td>3×3 = 9 cells</td></tr>
+      <tr><td>Dimensions</td><td>Market Growth Rate × Relative Market Share</td><td>Industry Attractiveness × Business Unit Strength</td></tr>
+      <tr><td>Criteria per axis</td><td>1 single metric per axis</td><td>Multiple weighted criteria per axis</td></tr>
+      <tr><td>Complexity</td><td>Simple, quick to use</td><td>Complex — requires weighted scoring</td></tr>
+      <tr><td>Precision</td><td>Crude — single variable proxy</td><td>Nuanced — composite of many factors</td></tr>
+      <tr><td>Subjectivity</td><td>Low (data-driven metrics)</td><td>Higher (weighting involves judgment)</td></tr>
+      <tr><td>Best for</td><td>Quick review, fewer SBUs, clear data</td><td>Large diversified firms, many SBUs, different industries</td></tr>
+      <tr><td>Circle meaning</td><td>SBU circles — size = revenue</td><td>Circle size = industry size; pie slice = company's market share</td></tr>
+      <tr><td>Strategic outputs</td><td>4 quadrants (Stars, Cows, Question Marks, Dogs)</td><td>9 cells in 3 strategic bands (Grow / Hold / Divest)</td></tr>
+      <tr><td>Limitation</td><td>Market share oversimplifies competitive strength</td><td>Data-intensive; weighting is subjective</td></tr>
+    </table>
+    
+    <div class="exam-box">
+      <div class="exam-box-title">⭐ CRITICAL: BCG vs. GE vs. Ansoff — Different categories!</div>
+      <p><strong>BCG and GE = Portfolio Analysis tools</strong> → "Which of our existing SBUs should we invest in?"<br><strong>Ansoff = Product-Market Framework</strong> → "In which direction should we grow (product × market)?"<br>These answer COMPLETELY DIFFERENT questions — do NOT confuse them in a case study!</p>
+    </div>
+  </div>
+</div>
+
+<!-- ─── ANSOFF ─── -->
+<div id="card-ansoff" class="concept-card">
+  <div class="card">
+    <div class="card-title">🚀 Ansoff Matrix</div>
+    <div class="card-sub"><span class="tag">Module 3</span><span class="tag">Igor Ansoff, 1957</span><span class="tag purple">Product-Market Framework — NOT Portfolio Analysis</span></div>
+    
+    <div class="diagram-wrap">
+      <svg width="560" height="290" viewBox="0 0 560 290">
+        <!-- Headers -->
+        <text x="220" y="25" text-anchor="middle" font-size="12" font-weight="700" fill="#374151">EXISTING PRODUCT</text>
+        <text x="440" y="25" text-anchor="middle" font-size="12" font-weight="700" fill="#374151">NEW PRODUCT</text>
+        <text x="60" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="#374151" transform="rotate(-90,60,120)">EXISTING MARKET</text>
+        <text x="38" y="230" text-anchor="middle" font-size="11" font-weight="700" fill="#374151" transform="rotate(-90,38,230)">NEW MARKET</text>
+        
+        <!-- Market Penetration -->
+        <rect x="95" y="40" width="250" height="120" rx="10" fill="#dcfce7" stroke="#15803d" stroke-width="2"/>
+        <text x="220" y="80" text-anchor="middle" font-size="15" font-weight="800" fill="#14532d">MARKET PENETRATION</text>
+        <text x="220" y="100" text-anchor="middle" font-size="12" fill="#166534">Existing Product, Existing Market</text>
+        <text x="220" y="118" text-anchor="middle" font-size="12" font-weight="700" fill="#15803d">🟢 LOWEST RISK</text>
+        <text x="220" y="136" text-anchor="middle" font-size="11" fill="#4d7c0f">More ads · Price cuts · Loyalty</text>
+        
+        <!-- Product Development -->
+        <rect x="353" y="40" width="195" height="120" rx="10" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2"/>
+        <text x="450" y="80" text-anchor="middle" font-size="14" font-weight="800" fill="#1e3a8a">PRODUCT</text>
+        <text x="450" y="97" text-anchor="middle" font-size="14" font-weight="800" fill="#1e3a8a">DEVELOPMENT</text>
+        <text x="450" y="114" text-anchor="middle" font-size="11" fill="#1d4ed8">New Product, Existing Market</text>
+        <text x="450" y="130" text-anchor="middle" font-size="11" font-weight="700" fill="#2563eb">🟡 MEDIUM RISK</text>
+        <text x="450" y="147" text-anchor="middle" font-size="11" fill="#3b82f6">R&amp;D · Innovation</text>
+        
+        <!-- Market Development -->
+        <rect x="95" y="168" width="250" height="110" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+        <text x="220" y="206" text-anchor="middle" font-size="14" font-weight="800" fill="#92400e">MARKET</text>
+        <text x="220" y="223" text-anchor="middle" font-size="14" font-weight="800" fill="#92400e">DEVELOPMENT</text>
+        <text x="220" y="240" text-anchor="middle" font-size="11" fill="#d97706">Existing Product, New Market</text>
+        <text x="220" y="257" text-anchor="middle" font-size="11" font-weight="700" fill="#b45309">🟡 MEDIUM RISK</text>
+        <text x="220" y="272" text-anchor="middle" font-size="11" fill="#b45309">New geography · New segments</text>
+        
+        <!-- Diversification -->
+        <rect x="353" y="168" width="195" height="110" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+        <text x="450" y="206" text-anchor="middle" font-size="14" font-weight="800" fill="#7f1d1d">DIVERSIFICATION</text>
+        <text x="450" y="223" text-anchor="middle" font-size="11" fill="#991b1b">New Product, New Market</text>
+        <text x="450" y="240" text-anchor="middle" font-size="11" font-weight="700" fill="#dc2626">🔴 HIGHEST RISK</text>
+        <text x="450" y="257" text-anchor="middle" font-size="11" fill="#b91c1c">Related or Unrelated</text>
+        <text x="450" y="272" text-anchor="middle" font-size="11" fill="#b91c1c">Completely new territory</text>
+        
+        <!-- Risk arrow -->
+        <text x="360" y="288" text-anchor="end" font-size="10" fill="#6b7280">← SAFER</text>
+        <text x="365" y="288" font-size="10" fill="#6b7280">RISKIER →</text>
+      </svg>
+    </div>
+    
+    <div class="case-box">
+      <div class="case-box-title">📱 Case: Apply Ansoff to Reliance Jio</div>
+      <p><strong>Market Penetration:</strong> Jio offers free or cheaper data in existing Indian telecom market (same product, same market)</p>
+      <p><strong>Product Development:</strong> Jio launches JioFiber broadband to existing mobile customers (new product, existing market)</p>
+      <p><strong>Market Development:</strong> Jio expands to rural India where it didn't operate before (same mobile services, new geographic market)</p>
+      <p><strong>Diversification:</strong> Jio enters retail (JioMart) and healthcare — completely new industries</p>
+    </div>
+  </div>
+</div>
+
+<!-- ─── GRAND STRATEGY ─── -->
+<div id="card-grand" class="concept-card">
+  <div class="card">
+    <div class="card-title">🗺️ Grand Strategy Matrix</div>
+    <div class="card-sub"><span class="tag">Module 3</span></div>
+    <p style="font-size:14px;">A quick directional tool: based on <strong>market growth rate</strong> (Y-axis) and <strong>competitive position</strong> (X-axis), it tells you which broad strategic direction to pursue.</p>
+    
+    <div class="diagram-wrap">
+      <svg width="560" height="320" viewBox="0 0 560 320">
+        <!-- Axes -->
+        <line x1="280" y1="20" x2="280" y2="295" stroke="#9ca3af" stroke-width="2"/>
+        <line x1="30" y1="158" x2="530" y2="158" stroke="#9ca3af" stroke-width="2"/>
+        
+        <!-- Labels -->
+        <text x="280" y="15" text-anchor="middle" font-size="11" font-weight="700" fill="#374151">RAPID MARKET GROWTH</text>
+        <text x="280" y="310" text-anchor="middle" font-size="11" font-weight="700" fill="#374151">SLOW MARKET GROWTH</text>
+        <text x="30" y="155" text-anchor="start" font-size="11" font-weight="700" fill="#374151">STRONG</text>
+        <text x="490" y="155" text-anchor="start" font-size="11" font-weight="700" fill="#374151">WEAK</text>
+        
+        <!-- Q1 -->
+        <rect x="40" y="28" width="225" height="120" rx="8" fill="#dcfce7" stroke="#15803d" stroke-width="2"/>
+        <text x="152" y="58" text-anchor="middle" font-size="13" font-weight="800" fill="#14532d">QUADRANT I ✅</text>
+        <text x="152" y="77" text-anchor="middle" font-size="11" fill="#166534" font-weight="700">BEST POSITION</text>
+        <text x="152" y="95" text-anchor="middle" font-size="10" fill="#15803d">Strong + Rapid Growth</text>
+        <text x="152" y="110" text-anchor="middle" font-size="10" fill="#4d7c0f">Concentration · Market Dev</text>
+        <text x="152" y="125" text-anchor="middle" font-size="10" fill="#4d7c0f">Product Dev · Integration</text>
+        
+        <!-- Q2 -->
+        <rect x="295" y="28" width="225" height="120" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+        <text x="407" y="58" text-anchor="middle" font-size="13" font-weight="800" fill="#92400e">QUADRANT II ⚠️</text>
+        <text x="407" y="77" text-anchor="middle" font-size="11" fill="#b45309" font-weight="700">WEAK IN GOOD MARKET</text>
+        <text x="407" y="95" text-anchor="middle" font-size="10" fill="#d97706">Weak + Rapid Growth</text>
+        <text x="407" y="110" text-anchor="middle" font-size="10" fill="#b45309">Market Dev · Product Dev</text>
+        <text x="407" y="125" text-anchor="middle" font-size="10" fill="#b45309">Horizontal Integration</text>
+        
+        <!-- Q3 -->
+        <rect x="295" y="168" width="225" height="120" rx="8" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+        <text x="407" y="198" text-anchor="middle" font-size="13" font-weight="800" fill="#7f1d1d">QUADRANT III ❌</text>
+        <text x="407" y="217" text-anchor="middle" font-size="11" fill="#991b1b" font-weight="700">WORST POSITION</text>
+        <text x="407" y="235" text-anchor="middle" font-size="10" fill="#dc2626">Weak + Slow Growth</text>
+        <text x="407" y="250" text-anchor="middle" font-size="10" fill="#b91c1c">Retrenchment · Divestiture</text>
+        <text x="407" y="265" text-anchor="middle" font-size="10" fill="#b91c1c">Diversification · Liquidation</text>
+        
+        <!-- Q4 -->
+        <rect x="40" y="168" width="225" height="120" rx="8" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2"/>
+        <text x="152" y="198" text-anchor="middle" font-size="13" font-weight="800" fill="#1e3a8a">QUADRANT IV 💪</text>
+        <text x="152" y="217" text-anchor="middle" font-size="11" fill="#1d4ed8" font-weight="700">STRONG, STAGNANT MKT</text>
+        <text x="152" y="235" text-anchor="middle" font-size="10" fill="#2563eb">Strong + Slow Growth</text>
+        <text x="152" y="250" text-anchor="middle" font-size="10" fill="#3b82f6">Related/Unrelated Diversif.</text>
+        <text x="152" y="265" text-anchor="middle" font-size="10" fill="#3b82f6">Joint Ventures · New markets</text>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- ─── PORTER GENERIC ─── -->
+<div id="card-porter_gen" class="concept-card">
+  <div class="card">
+    <div class="card-title">🏆 Porter's Generic Competitive Strategies</div>
+    <div class="card-sub"><span class="tag">Module 3</span><span class="tag orange">BrewBean Case — High Exam Probability</span></div>
+    
+    <div class="diagram-wrap">
+      <svg width="560" height="280" viewBox="0 0 560 280">
+        <!-- Headers -->
+        <text x="225" y="25" text-anchor="middle" font-size="12" font-weight="700" fill="#374151">LOW COST</text>
+        <text x="440" y="25" text-anchor="middle" font-size="12" font-weight="700" fill="#374151">PRODUCT UNIQUENESS</text>
+        <text x="55" y="115" text-anchor="middle" font-size="11" font-weight="700" fill="#374151" transform="rotate(-90,55,115)">BROAD TARGET</text>
+        <text x="32" y="225" text-anchor="middle" font-size="11" font-weight="700" fill="#374151" transform="rotate(-90,32,225)">NARROW TARGET</text>
+        
+        <!-- Cost Leadership -->
+        <rect x="80" y="40" width="270" height="120" rx="10" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2"/>
+        <text x="215" y="82" text-anchor="middle" font-size="16" font-weight="800" fill="#1e3a8a">COST LEADERSHIP</text>
+        <text x="215" y="104" text-anchor="middle" font-size="12" fill="#1d4ed8">Be the CHEAPEST producer</text>
+        <text x="215" y="122" text-anchor="middle" font-size="11" fill="#2563eb">in the ENTIRE industry</text>
+        <text x="215" y="143" text-anchor="middle" font-size="11" fill="#3b82f6">E.g. Walmart · Jio · Ryanair</text>
+        
+        <!-- Differentiation -->
+        <rect x="360" y="40" width="185" height="120" rx="10" fill="#f3e8ff" stroke="#7c3aed" stroke-width="2"/>
+        <text x="452" y="82" text-anchor="middle" font-size="15" font-weight="800" fill="#6d28d9">DIFFERENTIATION</text>
+        <text x="452" y="104" text-anchor="middle" font-size="12" fill="#7c3aed">Be UNIQUE — customers</text>
+        <text x="452" y="122" text-anchor="middle" font-size="11" fill="#8b5cf6">pay a premium for it</text>
+        <text x="452" y="143" text-anchor="middle" font-size="11" fill="#a78bfa">E.g. Apple · Starbucks</text>
+        
+        <!-- Cost Focus -->
+        <rect x="80" y="170" width="270" height="95" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+        <text x="215" y="205" text-anchor="middle" font-size="15" font-weight="800" fill="#92400e">COST FOCUS</text>
+        <text x="215" y="223" text-anchor="middle" font-size="12" fill="#d97706">Lowest cost in a NICHE</text>
+        <text x="215" y="241" text-anchor="middle" font-size="11" fill="#b45309">E.g. Budget hostels for backpackers</text>
+        <text x="215" y="257" text-anchor="middle" font-size="11" fill="#b45309">IndiGo targeting price-sensitive flyers</text>
+        
+        <!-- Differentiation Focus -->
+        <rect x="360" y="170" width="185" height="95" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+        <text x="452" y="202" text-anchor="middle" font-size="13" font-weight="800" fill="#7f1d1d">DIFF. FOCUS</text>
+        <text x="452" y="220" text-anchor="middle" font-size="11" fill="#dc2626">Unique product for</text>
+        <text x="452" y="236" text-anchor="middle" font-size="11" fill="#b91c1c">a specific niche</text>
+        <text x="452" y="255" text-anchor="middle" font-size="11" fill="#b91c1c">E.g. Rolls-Royce</text>
+      </svg>
+    </div>
+    
+    <div class="exam-box">
+      <div class="exam-box-title">⭐ "Stuck in the Middle" — Critical Concept</div>
+      <p>A firm trying to pursue ALL three simultaneously ends up with: no clear competitive advantage, above-average costs, below-par differentiation, no niche expertise → <strong>below-average industry performance.</strong> Porter calls this "stuck in the middle."</p>
+    </div>
+    
+    <div class="case-box">
+      <div class="case-box-title">☕ BrewBean Café — Apply Porter's Generic Strategies</div>
+      <p><strong>Operations Head:</strong> Simplify menu, automate, bulk buy → lower prices = <strong>Cost Leadership</strong></p>
+      <p><strong>Marketing Head:</strong> Exclusive blends, personalised experience, premium prices = <strong>Differentiation</strong></p>
+      <p><strong>Business Dev Head:</strong> Focus only on university campuses = <strong>Focus Strategy</strong></p>
+      <p><strong>CEO's concern:</strong> Pursuing all three = <strong>Stuck in the Middle!</strong></p>
+      <p><strong>Recommendation:</strong> Given BrewBean's 5-year premium heritage → <strong>Differentiation Focus</strong> — double down on the premium co-working café experience for urban millennials/Gen-Z.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ─── EXAM Q ─── -->
+<div id="card-exam_q" class="concept-card">
+  <div class="card">
+    <div class="card-title">📝 22 Predicted Exam Questions</div>
+    <div class="card-sub"><span class="tag orange">Case-study based exam — apply concepts to scenarios</span></div>
+    <p style="font-size:13px; color: var(--muted-foreground);">Your professor said: 3 questions from 3 modules, attempt any 2. Apply concepts to cases. Use these to practice.</p>
+
+    <div id="qa-list"></div>
+  </div>
+</div>
+
+<!-- ─── TOOL SELECT ─── -->
+<div id="card-tool_select" class="concept-card">
+  <div class="card">
+    <div class="card-title">🔧 Tool Selection Guide — Scenario-Based Questions</div>
+    <div class="card-sub"><span class="tag orange">★ Professor said scenario-based questions will be asked ★</span></div>
+    
+    <table class="styled-table">
+      <tr><th>Business Question / Scenario</th><th>Best Tool</th><th>Why</th></tr>
+      <tr><td>"Assess profitability/attractiveness of this industry"</td><td><strong>Porter's 5+1 Forces</strong></td><td>Analyses competitive forces that determine industry profitability</td></tr>
+      <tr><td>"What does the macro-environment look like?"</td><td><strong>PESTEL + ETOP</strong></td><td>Scans external macro-factors (P,E,S,T,E,L)</td></tr>
+      <tr><td>"What internal capabilities give us an edge?"</td><td><strong>VRIO + RBV + Value Chain</strong></td><td>Tests whether internal resources are truly defensible advantages</td></tr>
+      <tr><td>"Generate strategic options for this firm"</td><td><strong>SWOT / TOWS</strong></td><td>Matches internal S&amp;W with external O&amp;T to generate SO/WO/ST/WT strategies</td></tr>
+      <tr><td>"Large diversified firm — which SBU to invest in?" (simple)</td><td><strong>BCG Matrix</strong></td><td>Quick portfolio overview using two metrics</td></tr>
+      <tr><td>"Large diversified firm with very different SBUs — invest where?" (complex)</td><td><strong>GE-McKinsey Nine Cell</strong></td><td>Multi-criteria weighted analysis when BCG is too simplistic</td></tr>
+      <tr><td>"In which direction should we grow?"</td><td><strong>Ansoff Matrix</strong></td><td>Product-market growth directions — which markets, which products</td></tr>
+      <tr><td>"How should we COMPETE in our market?" (business level)</td><td><strong>Porter's Generic Strategies</strong></td><td>Cost Leadership / Differentiation / Focus at SBU level</td></tr>
+      <tr><td>"What is our strategic direction given our market position?"</td><td><strong>Grand Strategy Matrix</strong></td><td>Quick directional framework: growth rate × competitive position</td></tr>
+      <tr><td>"How do we plan for deep, long-term uncertainty?"</td><td><strong>Scenario Analysis</strong></td><td>Creates 3 qualitative narratives of possible futures</td></tr>
+      <tr><td>"Should we compete in this industry or create a new space?"</td><td><strong>Blue Ocean vs Red Ocean</strong></td><td>Determines if better to fight rivals or make competition irrelevant</td></tr>
+      <tr><td>"What are our social responsibilities as a firm?"</td><td><strong>Carroll's CSR Pyramid + TBL</strong></td><td>Evaluates economic, legal, ethical, philanthropic responsibilities</td></tr>
+      <tr><td>"Why do internal capabilities matter so much today?"</td><td><strong>RBV + VUCA connection</strong></td><td>VUCA makes internal (RBV) resources more critical than external positioning</td></tr>
+    </table>
+  </div>
+</div>
+
+</div><!-- end #main -->
+
+<script>
+// Navigation
+function show(id) {
+  document.querySelectorAll('.concept-card').forEach(c => c.classList.remove('visible'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  const card = document.getElementById('card-' + id);
+  if (card) card.classList.add('visible');
+  const btns = document.querySelectorAll('.nav-btn');
+  btns.forEach(b => { if (b.getAttribute('onclick') === `show('${id}')`) b.classList.add('active'); });
+  document.getElementById('main').scrollTop = 0;
+  window.scrollTo(0, 0);
+}
+
+// Q&A data
+const qas = [
+  { q: "1. Explain Mintzberg's 5 Ps of Strategy. (Module 1)", 
+    a: "Plan (deliberate intended action), Ploy (tactical competitive maneuver), Pattern (consistent behaviour = emergent strategy), Position (market niche placement), Perspective (organisational worldview). Real strategy = blend of deliberate + emergent patterns." },
+  { q: "2. Distinguish Vision, Mission, Objectives, and Strategic Intent. (Module 1)", 
+    a: "Strategic Intent = stretch ambition (decades). Vision = where we want to be (long-term). Mission = why we exist (present purpose). Objectives = specific, measurable, time-bound targets. Each is more concrete than the previous." },
+  { q: "3. Explain the Strategic Management Process. (Module 1)", 
+    a: "4 phases: (1) Strategic Intent — define V/M/O; (2) Formulation — analyse environment, make choices; (3) Implementation — programs, budgets, procedures; (4) Evaluation & Control — measure, correct. CYCLE, not linear." },
+  { q: "4. What are the four levels of strategy? Role of each actor. (Module 1)", 
+    a: "Corporate (Board/CEO), SBU (division heads), Functional (dept. heads), Operational (supervisors). Each derives direction from the level above. Single-business firms = 3 levels only (no SBU)." },
+  { q: "5. Corporate Strategy types with all sub-types. (Module 1)", 
+    a: "Growth (Concentration, Vertical Integration fwd/bkwd, Horizontal, Diversification related/unrelated), Stability (No-change, Pause, Profit), Retrenchment (Turnaround, Divestment, Liquidation)." },
+  { q: "6. Porter's 5 Forces + the 6th force added by whom? (Module 2)", 
+    a: "Forces: New Entrants, Supplier Power, Buyer Power, Substitutes, Industry Rivalry. 6th Force = Complementors (Brandenburger & Nalebuff, 1996) — products that INCREASE your product's value when used together (e.g., Intel + Microsoft)." },
+  { q: "★ 7. What is VUCA? How is RBV related to VUCA? (PROFESSOR FLAGGED)", 
+    a: "VUCA: Volatility, Uncertainty, Complexity, Ambiguity. RBV: Competitive advantage from internal heterogeneous + immobile resources (VRIO). 3 links: (1) VUCA makes RBV more relevant — external positions erode; internal resources are durable. (2) VUCA amplifies VRIO value — rare resources buy more advantage when environment is turbulent. (3) Dynamic Capabilities = RBV for VUCA — sense/seize/reconfigure." },
+  { q: "★ 8. Compare BCG vs GE-McKinsey Matrix. (PROFESSOR FLAGGED)", 
+    a: "SIMILARITIES: Both portfolio analysis tools, both 2D matrix, both guide invest/hold/divest, both 1970s, both circles on grid. DIFFERENCES: BCG = 2×2, 1 metric/axis, simple; GE = 3×3, multiple weighted criteria, complex. BCG = Growth Rate × Market Share; GE = Industry Attractiveness × Business Strength." },
+  { q: "★ 9. Scenario-based: identify which tool to use. (PROFESSOR FLAGGED)", 
+    a: "BCG: quick diversified portfolio. GE: complex multi-SBU portfolio. Porter 5 Forces: single industry attractiveness. Ansoff: growth direction. Porter's Generic: HOW to compete (SBU level). VRIO: internal capability. Scenario Analysis: VUCA long-term. Blue Ocean: create new market space. See Tool Selection Guide." },
+  { q: "10. VRIO? Two foundational RBV properties? (Module 2)", 
+    a: "VRIO: Valuable → Rare → Inimitable → Organized = Sustained Competitive Advantage. RBV properties: Heterogeneous (firms have different resource bundles) + Immobile (resources don't freely transfer). These explain WHY advantage can be sustained." },
+  { q: "11. TOWS Matrix — how does it generate strategic options? (Module 2)", 
+    a: "SO (Maxi-Maxi: use strengths to grab opportunities), WO (Mini-Maxi: use opportunities to overcome weaknesses), ST (Maxi-Mini: use strengths to neutralise threats), WT (Mini-Mini: minimise weaknesses, avoid threats). SWOT = diagnostic; TOWS = prescriptive." },
+  { q: "12. Porter's Generic Strategies + 'stuck in the middle'. Apply to BrewBean. (Module 3)", 
+    a: "Cost Leadership (broad, low cost), Differentiation (broad, unique), Focus (niche — cost or diff). Stuck in middle = pursuing all three = no clear advantage. BrewBean: Ops Head = Cost Leadership, Mktg Head = Differentiation, BizDev = Focus. Recommendation: Differentiation Focus on urban millennials." },
+  { q: "13. Ansoff Matrix — how different from BCG/GE? (Module 3)", 
+    a: "Ansoff = Product-Market Framework (growth direction). BCG and GE = Portfolio Analysis (which SBU to invest in). Ansoff's four: Market Penetration (safest), Product Dev, Market Dev, Diversification (riskiest)." },
+  { q: "14. Carroll's CSR Pyramid — all four levels. (Module 1)", 
+    a: "From base to tip: Economic (be profitable — foundation), Legal (obey all laws), Ethical (do what is right beyond law), Philanthropic (give back voluntarily). All four must be pursued; economic is the necessary base that enables all others." },
+  { q: "15. CSR vs Strategic CSR vs CSV. (Module 1)", 
+    a: "Traditional CSR = philanthropic add-on, seen as cost. Strategic CSR = integrated into strategy for competitive advantage. CSV (Porter & Kramer 2011) = social good IS the business model — redesign products/value chain so creating social value = creating economic value." },
+  { q: "16. Triple Bottom Line — three pillars. (Module 1)", 
+    a: "People (social equity — fair treatment of stakeholders), Planet (environmental responsibility — reduce footprint), Profit (economic viability — remain sustainable). True sustainability = all three simultaneously." },
+  { q: "17. Companies Act 2013, Section 135. (Module 1)", 
+    a: "India mandatory CSR. Applies to: net worth ≥ ₹500 crore OR turnover ≥ ₹1000 crore OR net profit ≥ ₹5 crore. Must spend: 2% of average net profits (3 years). Must form Board-level CSR Committee." },
+  { q: "18. Blue Ocean vs Red Ocean — ERRC framework. (Module 2)", 
+    a: "Red Ocean = fight for existing demand. Blue Ocean = create uncontested new space. Break value-cost trade-off. ERRC: Eliminate (remove industry norms), Reduce (below standard), Raise (above standard), Create (never offered before). E.g., Cirque du Soleil." },
+  { q: "19. Value Chain Analysis — how does it help find competitive advantage? (Module 2)", 
+    a: "Porter (1985): Primary activities (Inbound Logistics, Operations, Outbound, Mktg&Sales, Service) + Support (Infrastructure, HRM, Tech Dev, Procurement). Margin = Value Created − Total Cost. Identify where to reduce cost (cost advantage) or add uniqueness (differentiation advantage)." },
+  { q: "20. SpiceJet turnaround — strategic analysis. (Module 1)", 
+    a: "2014 crisis: cash crunch, cancellations, DGCA warning. Turnaround under Ajay Singh (2015): leadership change, cost restructuring (leases, staff), fleet optimization (737 Max), SpiceXpress cargo, route rationalization. = Retrenchment → Turnaround. Business strategy: maintained Cost Leadership (LCC)." },
+  { q: "21. Difference between Planning and Strategy? (Module 1)", 
+    a: "Planning = W's (What, When, Who, Where) — administrative, short-term, operational. Strategy = How (how do we compete and win?) — directional, long-term, competitive. Planning: 'We open 10 stores.' Strategy: 'We become the co-working café of choice for Gen Z.'" },
+  { q: "22. BCG Matrix linked to Product Life Cycle? (Module 3)", 
+    a: "Introduction → Question Mark (entering high-growth market with low share). Growth → Star (building share rapidly). Maturity → Cash Cow (harvest). Decline → Dog (exit). PLC shows the NATURAL JOURNEY of every product/SBU if left without strategic intervention." },
+];
+
+const qaList = document.getElementById('qa-list');
+qas.forEach((item, i) => {
+  const wrap = document.createElement('div');
+  wrap.style.cssText = 'border:1px solid var(--border);border-radius:8px;margin-bottom:8px;overflow:hidden;';
+  
+  const header = document.createElement('div');
+  const isStar = item.q.startsWith('★');
+  header.style.cssText = `padding:12px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:${isStar ? '#fff7ed' : 'var(--card)'};`;
+  header.innerHTML = `<span style="font-size:13px;font-weight:${isStar ? '700' : '600'};color:${isStar ? '#c2410c' : 'var(--foreground)'};">${item.q}</span><span style="font-size:18px;color:#9ca3af;">+</span>`;
+  
+  const body = document.createElement('div');
+  body.style.cssText = 'display:none;padding:12px 16px;background:#f8fafc;border-top:1px solid var(--border);font-size:13px;line-height:1.6;';
+  body.textContent = item.a;
+  
+  header.onclick = () => {
+    const open = body.style.display !== 'none';
+    body.style.display = open ? 'none' : 'block';
+    header.querySelector('span:last-child').textContent = open ? '+' : '−';
+  };
+  
+  wrap.appendChild(header);
+  wrap.appendChild(body);
+  qaList.appendChild(wrap);
+});
+</script>
+</body>
+</html>
